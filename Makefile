@@ -6,7 +6,7 @@ SRC_FILES = $(shell find $(SRC_DIR) -name *.cc)
 INC_FILES = $(shell find $(INC_DIR) -name *.hh)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.cc, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-EXTRAS = -g
+EXTRAS = -g -Wno-unused-variable
 CFLAGS = $(EXTRAS) -Wall -Wextra -Werror -pedantic
 IFLAGS = -I $(INC_DIR)
 LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system # -lsfml-audio
