@@ -1,25 +1,34 @@
 SRC_DIR = src
 INC_DIR = inc
 OBJ_DIR = obj
+TST_DIR = tests
 
-SRC_FILES = $(shell find $(SRC_DIR) -name *.cc)
-INC_FILES = $(shell find $(INC_DIR) -name *.hh)
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.cc, $(OBJ_DIR)/%.o, $(SRC_FILES))
+BIN_SRC_FILES = $(shell find $(SRC_DIR) -name *.cc)
+BIN_INC_FILES = $(shell find $(INC_DIR) -name *.hh)
+BIN_OBJ_FILES = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(BIN_SRC_FILES))
+
+TST_SRC_FILES = $(shell find $(TST_DIR) -name *.cc)
+TST_OBJ_FILES = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(TST_SRC_FILES))
 
 EXTRAS = -g -Wno-unused-variable
 CFLAGS = $(EXTRAS) -Wall -Wextra -Werror -pedantic
 IFLAGS = -I $(INC_DIR)
 LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system # -lsfml-audio
+TFLAGS = -lcriterion
 
-TARGET = teapot
+TARGETS = teapot test
 
-all: $(TARGET)
+all: $(TARGETS)
 
-$(TARGET): $(OBJ_FILES)
+teapot: $(BIN_OBJ_FILES)
 	@echo -e "LINK\t$@"
 	@$(CXX) $(CFLAGS) $(IFLAGS) $(LFLAGS) -o $@ $^
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cc $(INC_FILES)
+test: $(TST_OBJ_FILES)
+	@echo -e "LINK\t$@"
+	@$(CXX) $(CFLAGS) $(IFLAGS) $(LFLAGS) $(TFLAGS) -o $@ $^
+
+$(OBJ_DIR)/%.o: %.cc $(BIN_INC_FILES)
 	@mkdir -p $(shell dirname $@)
 	@echo -e "CC\t$@"
 	@$(CXX) $(CFLAGS) $(IFLAGS) -c -o $@ $<
