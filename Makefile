@@ -34,7 +34,7 @@ $(OBJ_DIR)/%.o: %.cc $(BIN_INC_FILES)
 	@$(CXX) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 clean:
-	@rm -rf $(TARGET) $(OBJ_DIR)
+	@rm -rf $(TARGETS) $(OBJ_DIR)
 
 re: clean all
 
