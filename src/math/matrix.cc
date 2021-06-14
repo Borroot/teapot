@@ -30,7 +30,8 @@ bool mat4::operator!=(const mat4 &other)
 mat4 mat4::operator*(const mat4 &other)
 {
     mat4 result = mat4();
-    for (short y = 0; y < 4; y++) {
+    for (short y = 0; y < 4; y++)
+    {
         for (short x = 0; x < 4; x++)
         {
             double dot = 0;
@@ -40,6 +41,25 @@ mat4 mat4::operator*(const mat4 &other)
         }
     }
     return result;
+}
+
+mat4 &mat4::operator*=(const mat4 &other)
+{
+    double result[4][4];
+    for (short y = 0; y < 4; y++)
+    {
+        for (short x = 0; x < 4; x++)
+        {
+            double dot = 0;
+            for (short n = 0; n < 4; n++)
+                dot += this->matrix[y][n] * other.matrix[n][x];
+            result[y][x] = dot;
+        }
+    }
+    for (short y = 0; y < 4; y++)
+        for (short x = 0; x < 4; x++)
+            this->matrix[y][x] = result[y][x];
+    return *this;
 }
 
 std::ostream &operator<<(std::ostream &os, const mat4 &matrix)

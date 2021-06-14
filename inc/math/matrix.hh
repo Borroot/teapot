@@ -16,6 +16,7 @@ public:
     bool operator!=(const mat4 &);
 
     mat4 operator*(const mat4 &);
+    mat4 &operator*=(const mat4 &);
 
     friend std::ostream &operator<<(std::ostream &, const mat4 &);
 };
