@@ -12,7 +12,9 @@ public:
     vec3 &normalize();
     double length();
     double dot(const vec3 &);
-    // TODO double cross(const vec3 &);
+
+    double operator*(const vec3 &);  // dot product
+    double operator^(const vec3 &);  // cross product TODO
 
     bool operator==(const vec3 &);
     bool operator!=(const vec3 &);

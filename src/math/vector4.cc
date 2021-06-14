@@ -36,7 +36,7 @@ double vec4::length()
     return sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2) + pow(this->w, 2));
 }
 
-double vec4::dot(const vec4 &v)
+double vec4::operator*(const vec4 &v)
 {
     return this->x * v.x + this->y * v.y + this->z * v.z + this->w * v.w;
 }

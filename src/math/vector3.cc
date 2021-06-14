@@ -26,7 +26,7 @@ double vec3::length()
     return sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2));
 }
 
-double vec3::dot(const vec3 &v)
+double vec3::operator*(const vec3 &v)
 {
     return this->x * v.x + this->y * v.y + this->z * v.z;
 }

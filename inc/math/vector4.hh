@@ -13,7 +13,9 @@ public:
     vec4 &normalize();
     double length();
     double dot(const vec4 &);
-    // TODO double cross(const vec4 &);
+
+    double operator*(const vec4 &);  // dot product
+    double operator^(const vec4 &);  // cross product TODO
 
     bool operator==(const vec4 &);
     bool operator!=(const vec4 &);
