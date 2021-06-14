@@ -58,3 +58,49 @@ Test(vector, equality)
     v3.w = 2;
     cr_assert_neq(v3, v4);
 }
+
+Test(vector, addition)
+{
+    vec3 v1(1, 2, 3);
+    vec3 v2(1, 2, 3);
+    cr_assert_eq(v1 + v2, *(new vec3(2, 4, 6)));
+    cr_assert_eq(v1, *(new vec3(1, 2, 3)));
+    cr_assert_eq(v2, *(new vec3(1, 2, 3)));
+
+    v1 += v2;
+    cr_assert_eq(v1, *(new vec3(2, 4, 6)));
+    cr_assert_eq(v2, *(new vec3(1, 2, 3)));
+
+    vec4 v3(1, 2, 3, 4);
+    vec4 v4(1, 2, 3, 4);
+    cr_assert_eq(v3 + v4, *(new vec4(2, 4, 6, 8)));
+    cr_assert_eq(v3, *(new vec4(1, 2, 3, 4)));
+    cr_assert_eq(v4, *(new vec4(1, 2, 3, 4)));
+
+    v3 += v4;
+    cr_assert_eq(v3, *(new vec4(2, 4, 6, 8)));
+    cr_assert_eq(v4, *(new vec4(1, 2, 3, 4)));
+}
+
+Test(vector, substraction)
+{
+    vec3 v1(1, 2, 3);
+    vec3 v2(1, 2, 3);
+    cr_assert_eq(v1 - v2, *(new vec3(0, 0, 0)));
+    cr_assert_eq(v1, *(new vec3(1, 2, 3)));
+    cr_assert_eq(v2, *(new vec3(1, 2, 3)));
+
+    v1 -= v2;
+    cr_assert_eq(v1, *(new vec3(0, 0, 0)));
+    cr_assert_eq(v2, *(new vec3(1, 2, 3)));
+
+    vec4 v3(1, 2, 3, 4);
+    vec4 v4(1, 2, 3, 4);
+    cr_assert_eq(v3 - v4, *(new vec4(0, 0, 0, 0)));
+    cr_assert_eq(v3, *(new vec4(1, 2, 3, 4)));
+    cr_assert_eq(v4, *(new vec4(1, 2, 3, 4)));
+
+    v3 -= v4;
+    cr_assert_eq(v3, *(new vec4(0, 0, 0, 0)));
+    cr_assert_eq(v4, *(new vec4(1, 2, 3, 4)));
+}

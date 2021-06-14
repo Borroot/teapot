@@ -16,10 +16,11 @@ public:
 
     bool operator==(const vec3 &);
     bool operator!=(const vec3 &);
+
+    vec3 operator+(const vec3 &);
+    vec3 operator-(const vec3 &);
     vec3 &operator+=(const vec3 &);
     vec3 &operator-=(const vec3 &);
-    friend vec3 operator+(vec3, const vec3 &);
-    friend vec3 operator-(vec3, const vec3 &);
 
     friend std::ostream &operator<<(std::ostream &, const vec3 &);
 };

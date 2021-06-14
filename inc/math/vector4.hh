@@ -17,10 +17,11 @@ public:
 
     bool operator==(const vec4 &);
     bool operator!=(const vec4 &);
+
+    vec4 operator+(const vec4 &);
+    vec4 operator-(const vec4 &);
     vec4 &operator+=(const vec4 &);
     vec4 &operator-=(const vec4 &);
-    friend vec4 operator+(vec4, const vec4 &);
-    friend vec4 operator-(vec4, const vec4 &);
 
     friend std::ostream &operator<<(std::ostream &, const vec4 &);
 };

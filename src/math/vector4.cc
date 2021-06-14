@@ -51,6 +51,36 @@ bool vec4::operator!=(const vec4 &v)
     return !(*this == v);
 }
 
+vec4 vec4::operator+(const vec4 &v)
+{
+    vec4 result(this->x + v.x, this->y + v.y, this->z + v.z, this->w + v.w);
+    return result;
+}
+
+vec4 vec4::operator-(const vec4 &v)
+{
+    vec4 result(this->x - v.x, this->y - v.y, this->z - v.z, this->w - v.w);
+    return result;
+}
+
+vec4 &vec4::operator+=(const vec4 &v)
+{
+    this->x += v.x;
+    this->y += v.y;
+    this->z += v.z;
+    this->w += v.w;
+    return *this;
+}
+
+vec4 &vec4::operator-=(const vec4 &v)
+{
+    this->x -= v.x;
+    this->y -= v.y;
+    this->z -= v.z;
+    this->w -= v.w;
+    return *this;
+}
+
 std::ostream &operator<<(std::ostream &os, const vec4 &v)
 {
     os << v.x << " " << v.y << " " << v.z << " " << v.w << std::endl;
