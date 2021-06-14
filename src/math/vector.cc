@@ -24,6 +24,26 @@ vec4::vec4(double x, double y, double z, double w)
     this->w = w;
 }
 
+bool vec3::operator==(const vec3 &v)
+{
+    return this->x == v.x && this->y == v.y && this->z == v.z;
+}
+
+bool vec3::operator!=(const vec3 &v)
+{
+    return !(*this == v);
+}
+
+bool vec4::operator==(const vec4 &v)
+{
+    return this->x == v.x && this->y == v.y && this->z == v.z && this->w == v.w;
+}
+
+bool vec4::operator!=(const vec4 &v)
+{
+    return !(*this == v);
+}
+
 std::ostream &operator<<(std::ostream &os, const vec3 &v)
 {
     os << v.x << " " << v.y << " " << v.z << std::endl;

@@ -9,6 +9,9 @@ public:
 
     vec3(double x, double y, double z);
 
+    bool operator==(const vec3 &);
+    bool operator!=(const vec3 &);
+
     friend std::ostream &operator<<(std::ostream &, const vec3 &);
 };
 
@@ -19,6 +22,9 @@ public:
 
     vec4(double x, double y, double z);
     vec4(double x, double y, double z, double w);
+
+    bool operator==(const vec4 &);
+    bool operator!=(const vec4 &);
 
     friend std::ostream &operator<<(std::ostream &, const vec4 &);
 };
