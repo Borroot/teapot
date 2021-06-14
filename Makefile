@@ -8,7 +8,8 @@ BIN_INC_FILES = $(shell find $(INC_DIR) -name *.hh)
 BIN_OBJ_FILES = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(BIN_SRC_FILES))
 
 TST_SRC_FILES = $(shell find $(TST_DIR) -name *.cc)
-TST_OBJ_FILES = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(TST_SRC_FILES))
+TST_OBJ_FILES = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(TST_SRC_FILES)) \
+                $(filter-out %/main.o, $(BIN_OBJ_FILES))
 
 EXTRAS = -g -Wno-unused-variable
 CFLAGS = $(EXTRAS) -Wall -Wextra -Werror -pedantic
