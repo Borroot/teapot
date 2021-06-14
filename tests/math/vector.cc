@@ -1,10 +1,34 @@
 #include <criterion/criterion.h>
+#include <math.h>
 #include "math/vector.hh"
 
 Test(vector, vec4_declaration)
 {
     vec4 v(2, 3, 4);
     cr_assert_eq(v.w, 1.0);
+}
+
+Test(vector, length)
+{
+    vec3 v1(3, 2, 1);
+    cr_assert_float_eq(v1.length(), sqrt(14), 0.1);
+
+    vec4 v2(3, 2, 1, 4);
+    cr_assert_float_eq(v2.length(), sqrt(30), 0.1);
+}
+
+Test(vector, normalize)
+{
+    vec3 v1(0, 0, 0);
+    cr_assert_eq(v1.normalize(), *(new vec3(0, 0, 0)));
+
+    vec3 v2(1, 0, 0);
+    vec3 v3(3, 0, 0);
+    cr_assert_eq(v2.normalize(), *(new vec3(1, 0, 0)));
+    cr_assert_eq(v3.normalize(), *(new vec3(1, 0, 0)));
+
+    vec4 v4(3, 0, 0, 0);
+    cr_assert_eq(v4.normalize(), *(new vec4(1, 0, 0, 0)));
 }
 
 Test(vector, dot)

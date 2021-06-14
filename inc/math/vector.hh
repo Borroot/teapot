@@ -9,7 +9,10 @@ public:
 
     vec3(double x, double y, double z);
 
+    vec3 normalize();
+    double length();
     double dot(const vec3 &);
+    // TODO double cross(const vec3 &);
 
     bool operator==(const vec3 &);
     bool operator!=(const vec3 &);
@@ -25,7 +28,10 @@ public:
     vec4(double x, double y, double z);
     vec4(double x, double y, double z, double w);
 
+    vec4 normalize();
+    double length();
     double dot(const vec4 &);
+    // TODO double cross(const vec4 &);
 
     bool operator==(const vec4 &);
     bool operator!=(const vec4 &);
