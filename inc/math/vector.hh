@@ -8,6 +8,7 @@ public:
     double x, y, z;
 
     vec3(double x, double y, double z);
+
     friend std::ostream &operator<<(std::ostream &, const vec3 &);
 };
 
@@ -18,5 +19,6 @@ public:
 
     vec4(double x, double y, double z);
     vec4(double x, double y, double z, double w);
+
     friend std::ostream &operator<<(std::ostream &, const vec4 &);
 };

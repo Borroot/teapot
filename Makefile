@@ -11,7 +11,7 @@ TST_SRC_FILES = $(shell find $(TST_DIR) -name *.cc)
 TST_OBJ_FILES = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(TST_SRC_FILES)) \
                 $(filter-out %/main.o, $(BIN_OBJ_FILES))
 
-EXTRAS = -g -Wno-unused-variable
+EXTRAS = -g -Wno-unused-variable -Wno-unused-parameter
 CFLAGS = $(EXTRAS) -Wall -Wextra -Werror -pedantic
 IFLAGS = -I $(INC_DIR)
 LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system # -lsfml-audio
