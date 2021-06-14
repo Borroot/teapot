@@ -9,6 +9,8 @@ public:
 
     vec3(double x, double y, double z);
 
+    double dot(const vec3 &);
+
     bool operator==(const vec3 &);
     bool operator!=(const vec3 &);
 
@@ -22,6 +24,8 @@ public:
 
     vec4(double x, double y, double z);
     vec4(double x, double y, double z, double w);
+
+    double dot(const vec4 &);
 
     bool operator==(const vec4 &);
     bool operator!=(const vec4 &);

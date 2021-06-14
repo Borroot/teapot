@@ -24,6 +24,16 @@ vec4::vec4(double x, double y, double z, double w)
     this->w = w;
 }
 
+double vec3::dot(const vec3 &v)
+{
+    return this->x * v.x + this->y * v.y + this->z * v.z;
+}
+
+double vec4::dot(const vec4 &v)
+{
+    return this->x * v.x + this->y * v.y + this->z * v.z + this->w * v.w;
+}
+
 bool vec3::operator==(const vec3 &v)
 {
     return this->x == v.x && this->y == v.y && this->z == v.z;
