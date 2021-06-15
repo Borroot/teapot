@@ -9,6 +9,7 @@ class vec4
 public:
     double x, y, z, w;
 
+    vec4() {};
     vec4(double x, double y, double z, double w);
     vec4(double x, double y, double z);
 
