@@ -21,13 +21,13 @@ vec4::vec4(double x, double y, double z, double w)
 
 vec4 &vec4::normalize()
 {
-    double sum = this->length();
-    if (sum != 0)
+    double length = this->length();
+    if (length != 0)
     {
-        this->x /= sum;
-        this->y /= sum;
-        this->z /= sum;
-        this->w /= sum;
+        this->x /= length;
+        this->y /= length;
+        this->z /= length;
+        this->w /= length;
     }
     return *this;
 }
@@ -54,14 +54,12 @@ bool vec4::operator!=(const vec4 &v)
 
 vec4 vec4::operator+(const vec4 &v)
 {
-    vec4 result(this->x + v.x, this->y + v.y, this->z + v.z, this->w + v.w);
-    return result;
+    return *(new vec4(this->x + v.x, this->y + v.y, this->z + v.z, this->w + v.w));
 }
 
 vec4 vec4::operator-(const vec4 &v)
 {
-    vec4 result(this->x - v.x, this->y - v.y, this->z - v.z, this->w - v.w);
-    return result;
+    return *(new vec4(this->x - v.x, this->y - v.y, this->z - v.z, this->w - v.w));
 }
 
 vec4 &vec4::operator+=(const vec4 &v)
@@ -85,9 +83,8 @@ vec4 &vec4::operator-=(const vec4 &v)
 vec4::operator vec3()
 {
     if (this->w == 0)
-        throw std::bad_cast("w cannot be 0 when casting");
-    vec3 result(this->x / this->w, this->y / this->w, this->z / this->w);
-    return result;
+        throw std::bad_cast();
+    return *(new vec3 (this->x / this->w, this->y / this->w, this->z / this->w));
 }
 
 std::ostream &operator<<(std::ostream &os, const vec4 &v)

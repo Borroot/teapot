@@ -1,5 +1,6 @@
 #include <criterion/criterion.h>
 #include <math.h>
+#include <typeinfo>
 #include "math/vector.hh"
 
 Test(vector, vec4_declaration)
@@ -137,4 +138,7 @@ Test(vector, casting)
     vec4 v3(9, 3, 6, 3);
     cr_assert_eq((vec3)v2, *(new vec3(2, 3, 4)));
     cr_assert_eq((vec3)v3, *(new vec3(3, 1, 2)));
+
+    vec4 v4(2, 3, 4, 0);
+    cr_assert_throw((vec3)v4, std::bad_cast);
 }

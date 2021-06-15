@@ -1,7 +1,8 @@
 #pragma once
 
 #include <iosfwd>
-#include "math/vector4.hh"
+
+class vec4;
 
 class vec3
 {

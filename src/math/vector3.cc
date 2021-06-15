@@ -11,12 +11,12 @@ vec3::vec3(double x, double y, double z)
 
 vec3 &vec3::normalize()
 {
-    double sum = this->length();
-    if (sum != 0)
+    double length = this->length();
+    if (length != 0)
     {
-        this->x /= sum;
-        this->y /= sum;
-        this->z /= sum;
+        this->x /= length;
+        this->y /= length;
+        this->z /= length;
     }
     return *this;
 }
@@ -61,14 +61,12 @@ bool vec3::operator!=(const vec3 &v)
 
 vec3 vec3::operator+(const vec3 &v)
 {
-    vec3 result(this->x + v.x, this->y + v.y, this->z + v.z);
-    return result;
+    return *(new vec3(this->x + v.x, this->y + v.y, this->z + v.z));
 }
 
 vec3 vec3::operator-(const vec3 &v)
 {
-    vec3 result(this->x - v.x, this->y - v.y, this->z - v.z);
-    return result;
+    return *(new vec3(this->x - v.x, this->y - v.y, this->z - v.z));
 }
 
 vec3 &vec3::operator+=(const vec3 &v)
@@ -89,8 +87,7 @@ vec3 &vec3::operator-=(const vec3 &v)
 
 vec3::operator vec4()
 {
-    vec4 result(this->x, this->y, this->z, 1);
-    return result;
+    return *(new vec4(this->x, this->y, this->z, 1));
 }
 
 std::ostream &operator<<(std::ostream &os, const vec3 &v)
