@@ -64,6 +64,27 @@ Test(vector, cross)
     vec3 v3(2, 4, 7);
     vec3 v4(5, 4, 2);
     cr_assert_eq(v3 ^ v4, *(new vec3(-20, 31, -12)));
+
+    vec4 v5(1, 0, 0);
+    vec4 v6(0, 1, 0);
+    cr_assert_eq(v5 ^ v6, *(new vec4(0, 0, 1, 1)));
+    cr_assert_eq(v5, *(new vec4(1, 0, 0, 1)));
+    cr_assert_eq(v6, *(new vec4(0, 1, 0, 1)));
+
+    v5 ^= v6;
+    cr_assert_eq(v5, *(new vec4(0, 0, 1, 1)));
+    cr_assert_eq(v6, *(new vec4(0, 1, 0, 1)));
+
+    vec4 v7(2, 4, 7);
+    vec4 v8(5, 4, 2);
+    cr_assert_eq(v7 ^ v8, *(new vec4(-20, 31, -12, 1)));
+
+    vec4 v9(4, 8, 14, 2);
+    vec4 v0(10, 8, 4, 2);
+    cr_assert_eq(v9 ^ v0, *(new vec4(-20, 31, -12, 1)));
+
+    vec4 v10(1, 2, 3, 0);
+    cr_assert_throw(v10 ^ v0, std::bad_cast);
 }
 
 Test(vector, equality)

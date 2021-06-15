@@ -42,6 +42,21 @@ double vec4::operator*(const vec4 &v)
     return this->x * v.x + this->y * v.y + this->z * v.z + this->w * v.w;
 }
 
+vec4 vec4::operator^(const vec4 &v)
+{
+    return (vec4)((vec3)*this ^ (vec3)(vec4)v);
+}
+
+vec4 &vec4::operator^=(const vec4 &v)
+{
+    vec4 result = *this ^ v;
+    this->x = result.x;
+    this->y = result.y;
+    this->z = result.z;
+    this->w = result.w;
+    return *this;
+}
+
 bool vec4::operator==(const vec4 &v)
 {
     return this->x == v.x && this->y == v.y && this->z == v.z && this->w == v.w;

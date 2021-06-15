@@ -18,7 +18,7 @@ public:
 
     double operator*(const vec4 &);  // dot product
 
-    vec4 operator^(const vec4 &);  // cross product TODO
+    vec4 operator^(const vec4 &);  // cross product
     vec4 &operator^=(const vec4 &);
 
     bool operator==(const vec4 &);

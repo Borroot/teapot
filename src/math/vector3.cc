@@ -33,11 +33,10 @@ double vec3::operator*(const vec3 &v)
 
 vec3 vec3::operator^(const vec3 &v)
 {
-    vec3 result(
+    return *(new vec3(
         this->y * v.z - this->z * v.y,
         this->z * v.x - this->x * v.z,
-        this->x * v.y - this->y * v.x);
-    return result;
+        this->x * v.y - this->y * v.x));
 }
 
 vec3 &vec3::operator^=(const vec3 &v)
@@ -45,7 +44,9 @@ vec3 &vec3::operator^=(const vec3 &v)
     double x = this->y * v.z - this->z * v.y;
     double y = this->z * v.x - this->x * v.z;
     double z = this->x * v.y - this->y * v.x;
-    this->x = x, this->y = y, this->z = z;
+    this->x = x;
+    this->y = y;
+    this->z = z;
     return *this;
 }
 
