@@ -44,6 +44,7 @@ vec3 &vec3::operator^=(const vec3 &v)
     double x = this->y * v.z - this->z * v.y;
     double y = this->z * v.x - this->x * v.z;
     double z = this->x * v.y - this->y * v.x;
+
     this->x = x;
     this->y = y;
     this->z = z;

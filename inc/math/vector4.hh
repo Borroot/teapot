@@ -9,8 +9,8 @@ class vec4
 public:
     double x, y, z, w;
 
-    vec4(double x, double y, double z);
     vec4(double x, double y, double z, double w);
+    vec4(double x, double y, double z);
 
     vec4 &normalize();
     double length();
