@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
-#include "math/vector4.hh"
+#include <typeinfo>
+#include "math/vector.hh"
 
 vec4::vec4(double x, double y, double z)
 {
@@ -79,6 +80,14 @@ vec4 &vec4::operator-=(const vec4 &v)
     this->z -= v.z;
     this->w -= v.w;
     return *this;
+}
+
+vec4::operator vec3()
+{
+    if (this->w == 0)
+        throw std::bad_cast("w cannot be 0 when casting");
+    vec3 result(this->x / this->w, this->y / this->w, this->z / this->w);
+    return result;
 }
 
 std::ostream &operator<<(std::ostream &os, const vec4 &v)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iosfwd>
+#include "math/vector3.hh"
 
 class vec4
 {
@@ -15,7 +16,9 @@ public:
     double dot(const vec4 &);
 
     double operator*(const vec4 &);  // dot product
-    double operator^(const vec4 &);  // cross product TODO
+
+    vec4 operator^(const vec4 &);  // cross product TODO
+    vec4 &operator^=(const vec4 &);
 
     bool operator==(const vec4 &);
     bool operator!=(const vec4 &);
@@ -24,6 +27,8 @@ public:
     vec4 operator-(const vec4 &);
     vec4 &operator+=(const vec4 &);
     vec4 &operator-=(const vec4 &);
+
+    operator vec3();
 
     friend std::ostream &operator<<(std::ostream &, const vec4 &);
 };

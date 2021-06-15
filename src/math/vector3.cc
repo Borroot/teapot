@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-#include "math/vector3.hh"
+#include "math/vector.hh"
 
 vec3::vec3(double x, double y, double z)
 {
@@ -29,6 +29,24 @@ double vec3::length()
 double vec3::operator*(const vec3 &v)
 {
     return this->x * v.x + this->y * v.y + this->z * v.z;
+}
+
+vec3 vec3::operator^(const vec3 &v)
+{
+    vec3 result(
+        this->y * v.z - this->z * v.y,
+        this->z * v.x - this->x * v.z,
+        this->x * v.y - this->y * v.x);
+    return result;
+}
+
+vec3 &vec3::operator^=(const vec3 &v)
+{
+    double x = this->y * v.z - this->z * v.y;
+    double y = this->z * v.x - this->x * v.z;
+    double z = this->x * v.y - this->y * v.x;
+    this->x = x, this->y = y, this->z = z;
+    return *this;
 }
 
 bool vec3::operator==(const vec3 &v)
@@ -67,6 +85,12 @@ vec3 &vec3::operator-=(const vec3 &v)
     this->y -= v.y;
     this->z -= v.z;
     return *this;
+}
+
+vec3::operator vec4()
+{
+    vec4 result(this->x, this->y, this->z, 1);
+    return result;
 }
 
 std::ostream &operator<<(std::ostream &os, const vec3 &v)
