@@ -8,7 +8,7 @@ private:
     double matrix[4][4];
 
 public:
-    mat4() = default;
+    mat4() {};
     mat4(const double[4][4]);
 
     double* operator[](const int &);

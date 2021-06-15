@@ -9,5 +9,6 @@ class mesh
 public:
     std::vector<triangle> triangles;
 
+    mesh() {};
     mesh(const std::string &);
 };

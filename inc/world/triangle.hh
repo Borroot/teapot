@@ -10,6 +10,7 @@ public:
     vec3 v1;
     vec3 v2;
 
+    triangle() {};
     triangle(const vec3 &, const vec3 &, const vec3 &);
 
     friend std::ostream &operator<<(std::ostream &, const triangle &);
