@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "math/common.hh"
 #include "render/render.hh"
 
 void set(sf::Uint8 *pixels, int &w, int x, int y, sf::Color c)
@@ -10,11 +11,28 @@ void set(sf::Uint8 *pixels, int &w, int x, int y, sf::Color c)
     pixels[index + 3] = c.a;
 }
 
+void draw_line(sf::Uint8 *pixels, int &w, int x1, int y1, int x2, int y2, sf::Color c)
+{
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+    double xinc = (double)dx / steps;
+    double yinc = (double)dy / steps;
+
+    double x = x1;
+    double y = y1;
+    for (int n = 0; n < steps; n++)
+    {
+        set(pixels, w, (int)x, (int)y, c);
+        x += xinc;
+        y += yinc;
+    }
+}
+
 void render(const World &world, sf::Uint8 *pixels, int &w, int &h)
 {
-    for (int y = h / 4; y < 3 * h / 4; y++)
-        for (int x = w / 4; x < 3 * w / 4; x++)
-            set(pixels, w, x, y, sf::Color::Cyan);
+    draw_line(pixels, w, 0, 0, w - 1, h - 1, sf::Color::Green);
 }
 
 void background(sf::Uint8 *pixels, int &w, int &h, sf::Color c)
