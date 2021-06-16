@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "world/world.hh"
 
 class Window
 {
@@ -29,6 +30,6 @@ public:
 
     bool poll(sf::Event &);
 
-    void draw();
+    void draw(const World &);
     void set(int x, int y, sf::Color c);
 };

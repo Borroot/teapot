@@ -1,11 +1,18 @@
+#include <vector>
 #include "core/window.hh"
+#include "world/mesh.hh"
+#include "world/world.hh"
 
 int main()
 {
+    Mesh cube("res/objects/cube.obj");
+    std::vector<Mesh> meshes = {cube};
+    World world(meshes);
+
     Window window(1200, 800);
     while (window.isopen())
     {
-        window.draw();
+        window.draw(world);
 
         sf::Event event;
         while (window.poll(event))

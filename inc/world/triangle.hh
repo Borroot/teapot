@@ -10,7 +10,6 @@ public:
     Vec4 *v1;
     Vec4 *v2;
 
-    Triangle() {};
     Triangle(Vec4 *, Vec4 *, Vec4 *);
 
     friend std::ostream &operator<<(std::ostream &, const Triangle &);

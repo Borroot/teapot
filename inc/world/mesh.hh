@@ -10,6 +10,5 @@ public:
     std::vector<Vec4> vertices;
     std::vector<Triangle> triangles;
 
-    Mesh() {};
     Mesh(const std::string &);
 };

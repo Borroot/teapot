@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <stdexcept>
 #include <string>
+#include <cstring>
 #include "core/window.hh"
+#include "render/render.hh"
 
 Window::Window(int w, int h)
 {
@@ -13,16 +15,13 @@ Window::Window(int w, int h)
 
     // times 4 since every pixel is 4 bytes RGBA
     this->pixels = new sf::Uint8[this->w * this->h * 4];
+    background(pixels, this->w, this->h, sf::Color::Black);
 
     if (!this->texture.create(this->w, this->h))
         throw std::runtime_error("Could not create texture.");
 
     if (!this->font.loadFromFile("res/fonts/SansMono-Regular.ttf"))
         throw std::runtime_error("Could not load font.");
-
-    for (int y = 0; y < this->h; y++)
-        for (int x = 0; x < this->w; x++)
-            this->set(x, y, sf::Color::Black);
 }
 
 bool Window::isopen()
@@ -52,8 +51,10 @@ sf::Text Window::fps()
     return text;
 }
 
-void Window::draw()
+void Window::draw(const World &world)
 {
+    render(world, this->pixels, this->w, this->h);
+
     this->texture.update(this->pixels);
     this->sprite.setTexture(this->texture);
 
@@ -63,13 +64,4 @@ void Window::draw()
     this->window.draw(this->fps());
 
     this->window.display();
-}
-
-void Window::set(int x, int y, sf::Color c)
-{
-    int index = this->w * y * 4 + x * 4;
-    this->pixels[index + 0] = c.r;
-    this->pixels[index + 1] = c.g;
-    this->pixels[index + 2] = c.b;
-    this->pixels[index + 3] = c.a;
 }
