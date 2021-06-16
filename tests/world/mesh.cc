@@ -1,19 +1,19 @@
 #include <criterion/criterion.h>
 #include "world/mesh.hh"
 
-Test(mesh, file)
+Test(Mesh, file)
 {
-    cr_assert_throw(mesh(""), std::runtime_error);
+    cr_assert_throw(Mesh(""), std::runtime_error);
 
-    mesh cube("tests/world/cube.obj");
+    Mesh cube("tests/world/cube.obj");
 
     cr_assert_eq(cube.vertices.size(), 8);
     cr_assert_eq(cube.triangles.size(), 12);
 }
 
-Test(triangle, pointers)
+Test(Triangle, pointers)
 {
-    mesh cube("tests/world/cube.obj");
+    Mesh cube("tests/world/cube.obj");
 
     // should use the same pointer and therefore both change
     cr_assert_eq(cube.triangles[0].v1->x, 1);

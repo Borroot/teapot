@@ -1,14 +1,13 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "render/color.hh"
 
-class window
+class Window
 {
 private:
-    sf::RenderWindow win;
-    int w;  // width  of the window
-    int h;  // height of the window
+    sf::RenderWindow window;
+    int w;  // width  of the <Window>
+    int h;  // height of the <Window>
 
     sf::Uint8 *pixels;
 
@@ -23,8 +22,7 @@ private:
     sf::Text fps();
 
 public:
-    window() {};
-    window(int w, int h);
+    Window(int w, int h);
 
     bool isopen();
     void close();
@@ -32,5 +30,5 @@ public:
     bool poll(sf::Event &);
 
     void draw();
-    void set(int x, int y, color c);
+    void set(int x, int y, sf::Color c);
 };

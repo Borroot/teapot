@@ -4,12 +4,12 @@
 #include <string>
 #include "world/triangle.hh"
 
-class mesh
+class Mesh
 {
 public:
-    std::vector<vec4> vertices;
-    std::vector<triangle> triangles;
+    std::vector<Vec4> vertices;
+    std::vector<Triangle> triangles;
 
-    mesh() {};
-    mesh(const std::string &);
+    Mesh() {};
+    Mesh(const std::string &);
 };

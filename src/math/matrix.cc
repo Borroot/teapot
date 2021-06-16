@@ -1,19 +1,19 @@
 #include <iostream>
 #include "math/matrix.hh"
 
-mat4::mat4(const double other[4][4])
+Mat4::Mat4(const double other[4][4])
 {
     for (short y = 0; y < 4; y++)
         for (short x = 0; x < 4; x++)
             this->matrix[y][x] = other[y][x];
 }
 
-double *mat4::operator[](const int &index)
+double *Mat4::operator[](const int &index)
 {
     return this->matrix[index];
 }
 
-bool mat4::operator==(const mat4 &other)
+bool Mat4::operator==(const Mat4 &other)
 {
     for (short y = 0; y < 4; y++)
         for (short x = 0; x < 4; x++)
@@ -22,14 +22,14 @@ bool mat4::operator==(const mat4 &other)
     return true;
 }
 
-bool mat4::operator!=(const mat4 &other)
+bool Mat4::operator!=(const Mat4 &other)
 {
     return !(*this == other);
 }
 
-mat4 mat4::operator*(const mat4 &other)
+Mat4 Mat4::operator*(const Mat4 &other)
 {
-    mat4 result = mat4();
+    Mat4 result = Mat4();
     for (short y = 0; y < 4; y++)
     {
         for (short x = 0; x < 4; x++)
@@ -43,7 +43,7 @@ mat4 mat4::operator*(const mat4 &other)
     return result;
 }
 
-mat4 &mat4::operator*=(const mat4 &other)
+Mat4 &Mat4::operator*=(const Mat4 &other)
 {
     double result[4][4];
     for (short y = 0; y < 4; y++)
@@ -62,7 +62,7 @@ mat4 &mat4::operator*=(const mat4 &other)
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &os, const mat4 &matrix)
+std::ostream &operator<<(std::ostream &os, const Mat4 &matrix)
 {
     for (short y = 0; y < 4; y++)
     {

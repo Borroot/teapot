@@ -2,15 +2,15 @@
 
 int main()
 {
-    window win(1200, 800);
-    while (win.isopen())
+    Window window(1200, 800);
+    while (window.isopen())
     {
-        win.draw();
+        window.draw();
 
         sf::Event event;
-        while (win.poll(event))
+        while (window.poll(event))
             if (event.type == sf::Event::Closed)
-                win.close();
+                window.close();
     }
 
     return EXIT_SUCCESS;

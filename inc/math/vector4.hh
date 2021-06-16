@@ -2,35 +2,35 @@
 
 #include <iosfwd>
 
-class vec3;
+class Vec3;
 
-class vec4
+class Vec4
 {
 public:
     double x, y, z, w;
 
-    vec4() {};
-    vec4(double x, double y, double z, double w);
-    vec4(double x, double y, double z);
+    Vec4() {};
+    Vec4(double x, double y, double z, double w);
+    Vec4(double x, double y, double z);
 
-    vec4 &normalize();
+    Vec4 &normalize();
     double length();
-    double dot(const vec4 &);
+    double dot(const Vec4 &);
 
-    double operator*(const vec4 &);  // dot product
+    double operator*(const Vec4 &);  // dot product
 
-    vec4 operator^(const vec4 &);  // cross product
-    vec4 &operator^=(const vec4 &);
+    Vec4 operator^(const Vec4 &);  // cross product
+    Vec4 &operator^=(const Vec4 &);
 
-    bool operator==(const vec4 &);
-    bool operator!=(const vec4 &);
+    bool operator==(const Vec4 &);
+    bool operator!=(const Vec4 &);
 
-    vec4 operator+(const vec4 &);
-    vec4 operator-(const vec4 &);
-    vec4 &operator+=(const vec4 &);
-    vec4 &operator-=(const vec4 &);
+    Vec4 operator+(const Vec4 &);
+    Vec4 operator-(const Vec4 &);
+    Vec4 &operator+=(const Vec4 &);
+    Vec4 &operator-=(const Vec4 &);
 
-    operator vec3();
+    operator Vec3();
 
-    friend std::ostream &operator<<(std::ostream &, const vec4 &);
+    friend std::ostream &operator<<(std::ostream &, const Vec4 &);
 };

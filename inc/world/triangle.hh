@@ -3,15 +3,15 @@
 #include <iosfwd>
 #include "math/vector4.hh"
 
-class triangle
+class Triangle
 {
 public:
-    vec4 *v0;
-    vec4 *v1;
-    vec4 *v2;
+    Vec4 *v0;
+    Vec4 *v1;
+    Vec4 *v2;
 
-    triangle() {};
-    triangle(vec4 *, vec4 *, vec4 *);
+    Triangle() {};
+    Triangle(Vec4 *, Vec4 *, Vec4 *);
 
-    friend std::ostream &operator<<(std::ostream &, const triangle &);
+    friend std::ostream &operator<<(std::ostream &, const Triangle &);
 };

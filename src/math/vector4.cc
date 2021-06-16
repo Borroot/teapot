@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "math/vector.hh"
 
-vec4::vec4(double x, double y, double z, double w)
+Vec4::Vec4(double x, double y, double z, double w)
 {
     if (w == 0)
         throw std::domain_error("divide by zero since w=0");
@@ -13,7 +13,7 @@ vec4::vec4(double x, double y, double z, double w)
     this->w = w;
 }
 
-vec4::vec4(double x, double y, double z)
+Vec4::Vec4(double x, double y, double z)
 {
     this->x = x;
     this->y = y;
@@ -21,9 +21,9 @@ vec4::vec4(double x, double y, double z)
     this->w = 1;
 }
 
-vec4 &vec4::normalize()
+Vec4 &Vec4::normalize()
 {
-    vec3 v = (vec3)*this;  // make w = 1
+    Vec3 v = (Vec3)*this;  // make w = 1
     double length = v.length();
     if (length != 0)
     {
@@ -35,7 +35,7 @@ vec4 &vec4::normalize()
     return *this;
 }
 
-double vec4::length()
+double Vec4::length()
 {
     if (this->w == 0)
         throw std::domain_error("divide by zero since w=0");
@@ -45,7 +45,7 @@ double vec4::length()
         pow(this->z / this->w, 2));
 }
 
-double vec4::operator*(const vec4 &v)
+double Vec4::operator*(const Vec4 &v)
 {
     if (this->w == 0 || v.w == 0)
         throw std::domain_error("divide by zero since w=0");
@@ -55,21 +55,21 @@ double vec4::operator*(const vec4 &v)
         (this->z / this->w) * (v.z / v.w));
 }
 
-vec4 vec4::operator^(const vec4 &v)
+Vec4 Vec4::operator^(const Vec4 &v)
 {
-    vec3 v1 = (vec3)*this;  // make w = 1
-    vec3 v2 = (vec3)(vec4)v;
+    Vec3 v1 = (Vec3)*this;  // make w = 1
+    Vec3 v2 = (Vec3)(Vec4)v;
 
-    return *(new vec4(
+    return *(new Vec4(
         v1.y * v2.z - v1.z * v2.y,
         v1.z * v2.x - v1.x * v2.z,
         v1.x * v2.y - v1.y * v2.x));
 }
 
-vec4 &vec4::operator^=(const vec4 &v)
+Vec4 &Vec4::operator^=(const Vec4 &v)
 {
-    vec3 v1 = (vec3)*this;  // make w = 1
-    vec3 v2 = (vec3)(vec4)v;
+    Vec3 v1 = (Vec3)*this;  // make w = 1
+    Vec3 v2 = (Vec3)(Vec4)v;
 
     double x = v1.y * v2.z - v1.z * v2.y;
     double y = v1.z * v2.x - v1.x * v2.z;
@@ -82,7 +82,7 @@ vec4 &vec4::operator^=(const vec4 &v)
     return *this;
 }
 
-bool vec4::operator==(const vec4 &v)
+bool Vec4::operator==(const Vec4 &v)
 {
     if (this->w == 0 || v.w == 0)
         throw std::domain_error("divide by zero since w=0");
@@ -94,32 +94,32 @@ bool vec4::operator==(const vec4 &v)
         this->z / this->w == v.z / v.w);
 }
 
-bool vec4::operator!=(const vec4 &v)
+bool Vec4::operator!=(const Vec4 &v)
 {
     return !(*this == v);
 }
 
-vec4 vec4::operator+(const vec4 &v)
+Vec4 Vec4::operator+(const Vec4 &v)
 {
     if (this->w == 0 || v.w == 0)
         throw std::domain_error("divide by zero since w=0");
-    return *(new vec4(
+    return *(new Vec4(
         this->x / this->w + v.x / v.w,
         this->y / this->w + v.y / v.w,
         this->z / this->w + v.z / v.w));
 }
 
-vec4 vec4::operator-(const vec4 &v)
+Vec4 Vec4::operator-(const Vec4 &v)
 {
     if (this->w == 0 || v.w == 0)
         throw std::domain_error("divide by zero since w=0");
-    return *(new vec4(
+    return *(new Vec4(
         this->x / this->w - v.x / v.w,
         this->y / this->w - v.y / v.w,
         this->z / this->w - v.z / v.w));
 }
 
-vec4 &vec4::operator+=(const vec4 &v)
+Vec4 &Vec4::operator+=(const Vec4 &v)
 {
     this->x = this->x / this->w + v.x / v.w;
     this->y = this->y / this->w + v.y / v.w;
@@ -128,7 +128,7 @@ vec4 &vec4::operator+=(const vec4 &v)
     return *this;
 }
 
-vec4 &vec4::operator-=(const vec4 &v)
+Vec4 &Vec4::operator-=(const Vec4 &v)
 {
     this->x = this->x / this->w - v.x / v.w;
     this->y = this->y / this->w - v.y / v.w;
@@ -137,16 +137,16 @@ vec4 &vec4::operator-=(const vec4 &v)
     return *this;
 }
 
-vec4::operator vec3()
+Vec4::operator Vec3()
 {
     if (this->w == 0)
         throw std::domain_error("divide by zero since w=0");
     if (this->w == 1)
-        return *(new vec3 (this->x, this->y, this->z));
-    return *(new vec3 (this->x / this->w, this->y / this->w, this->z / this->w));
+        return *(new Vec3 (this->x, this->y, this->z));
+    return *(new Vec3 (this->x / this->w, this->y / this->w, this->z / this->w));
 }
 
-std::ostream &operator<<(std::ostream &os, const vec4 &v)
+std::ostream &operator<<(std::ostream &os, const Vec4 &v)
 {
     os << v.x << " " << v.y << " " << v.z << " " << v.w << std::endl;
     return os;

@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include "world/mesh.hh"
 
-mesh::mesh(const std::string &filename)
+Mesh::Mesh(const std::string &filename)
 {
     std::ifstream file(filename);
     if (!file.is_open())
@@ -20,12 +20,12 @@ mesh::mesh(const std::string &filename)
         case 'v':
             double x, y, z;
             file >> x >> y >> z;
-            this->vertices.push_back(*(new vec4(x, y, z)));
+            this->vertices.push_back(*(new Vec4(x, y, z)));
             break;
         case 'f':
             int v0, v1, v2;
             file >> v0 >> v1 >> v2;
-            this->triangles.push_back(*(new triangle(&vertices[v0 - 1], &vertices[v1 - 1], &vertices[v2 - 1])));
+            this->triangles.push_back(*(new Triangle(&vertices[v0 - 1], &vertices[v1 - 1], &vertices[v2 - 1])));
             break;
         default:
             file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

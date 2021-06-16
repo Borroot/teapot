@@ -3,10 +3,10 @@
 #include <string>
 #include "core/window.hh"
 
-window::window(int w, int h)
+Window::Window(int w, int h)
 {
-    this->win.create(sf::VideoMode(w, h), "Teapot");
-    this->win.setFramerateLimit(500);
+    this->window.create(sf::VideoMode(w, h), "Teapot");
+    this->window.setFramerateLimit(500);
 
     this->w = w;
     this->h = h;
@@ -22,50 +22,50 @@ window::window(int w, int h)
 
     for (int y = 0; y < this->h; y++)
         for (int x = 0; x < this->w; x++)
-            this->set(x, y, WHITE);
+            this->set(x, y, sf::Color::Black);
 }
 
-bool window::isopen()
+bool Window::isopen()
 {
-    return this->win.isOpen();
+    return this->window.isOpen();
 }
 
-void window::close()
+void Window::close()
 {
     delete this->pixels;
-    this->win.close();
+    this->window.close();
 }
 
-bool window::poll(sf::Event &event)
+bool Window::poll(sf::Event &event)
 {
-    return this->win.pollEvent(event);
+    return this->window.pollEvent(event);
 }
 
-sf::Text window::fps()
+sf::Text Window::fps()
 {
     sf::Time currtime = clock.getElapsedTime();
     int fps = 1.f / (currtime.asSeconds() - this->prevdraw.asSeconds());
     this->prevdraw = currtime;
 
     sf::Text text("fps: " + std::to_string(fps), this->font, 15);
-    text.setFillColor(sf::Color(0x000000FF));
+    text.setFillColor(sf::Color::White);
     return text;
 }
 
-void window::draw()
+void Window::draw()
 {
     this->texture.update(this->pixels);
     this->sprite.setTexture(this->texture);
 
-    this->win.clear();
+    this->window.clear();
 
-    this->win.draw(this->sprite);
-    this->win.draw(this->fps());
+    this->window.draw(this->sprite);
+    this->window.draw(this->fps());
 
-    this->win.display();
+    this->window.display();
 }
 
-void window::set(int x, int y, color c)
+void Window::set(int x, int y, sf::Color c)
 {
     int index = this->w * y * 4 + x * 4;
     this->pixels[index + 0] = c.r;
