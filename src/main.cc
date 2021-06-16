@@ -2,7 +2,7 @@
 
 int main()
 {
-    window win;
+    window win(1200, 800);
     while (win.isopen())
     {
         win.draw();

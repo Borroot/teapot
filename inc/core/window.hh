@@ -15,13 +15,16 @@ private:
     sf::Texture texture;
     sf::Sprite sprite;
 
+    sf::Font font;
+
     sf::Clock clock;
     sf::Time prevdraw;
 
-    void fps();
+    sf::Text fps();
 
 public:
-    window();
+    window() {};
+    window(int w, int h);
 
     bool isopen();
     void close();
