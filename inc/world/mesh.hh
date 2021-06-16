@@ -7,6 +7,7 @@
 class mesh
 {
 public:
+    std::vector<vec4> vertices;
     std::vector<triangle> triangles;
 
     mesh() {};

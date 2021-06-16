@@ -1,17 +1,17 @@
 #pragma once
 
 #include <iosfwd>
-#include "math/vector3.hh"
+#include "math/vector4.hh"
 
 class triangle
 {
 public:
-    vec3 v0;
-    vec3 v1;
-    vec3 v2;
+    vec4 *v0;
+    vec4 *v1;
+    vec4 *v2;
 
     triangle() {};
-    triangle(const vec3 &, const vec3 &, const vec3 &);
+    triangle(vec4 *, vec4 *, vec4 *);
 
     friend std::ostream &operator<<(std::ostream &, const triangle &);
 };

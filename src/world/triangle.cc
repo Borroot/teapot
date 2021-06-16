@@ -1,8 +1,7 @@
 #include <ostream>
-#include "math/vector3.hh"
 #include "world/triangle.hh"
 
-triangle::triangle(const vec3 &v0, const vec3 &v1, const vec3 &v2)
+triangle::triangle(vec4 *v0, vec4 *v1, vec4 *v2)
 {
     this->v0 = v0;
     this->v1 = v1;

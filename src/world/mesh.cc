@@ -12,7 +12,6 @@ mesh::mesh(const std::string &filename)
     if (!file.is_open())
         throw std::runtime_error("could not open file " + filename);
 
-    std::vector<vec3> vertices;
     char word;
     while (file >> word)
     {
@@ -21,12 +20,12 @@ mesh::mesh(const std::string &filename)
         case 'v':
             double x, y, z;
             file >> x >> y >> z;
-            vertices.push_back(*(new vec3(x, y, z)));
+            this->vertices.push_back(*(new vec4(x, y, z)));
             break;
         case 'f':
-            int v1, v2, v3;
-            file >> v1 >> v2 >> v3;
-            this->triangles.push_back(*(new triangle(vertices[v1 - 1], vertices[v2 - 1], vertices[v3 - 1])));
+            int v0, v1, v2;
+            file >> v0 >> v1 >> v2;
+            this->triangles.push_back(*(new triangle(&vertices[v0 - 1], &vertices[v1 - 1], &vertices[v2 - 1])));
             break;
         default:
             file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
