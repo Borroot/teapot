@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iosfwd>
+#include "core/canvas.hh"
 #include "math/vector4.hh"
 
 class Triangle
@@ -18,8 +19,8 @@ public:
     Triangle(const Vec4, const Vec4, const Vec4);
     Triangle(const Triangle &);
 
-    void rasterize(sf::Uint8 *, int w, sf::Color);
-    void draw(sf::Uint8 *, int w, int h, sf::Color, bool fill, bool lines);
+    void rasterize(Canvas &, sf::Color);
+    void draw(Canvas &, sf::Color, bool fill, bool lines);
 
     friend std::ostream &operator<<(std::ostream &, const Triangle &);
 };

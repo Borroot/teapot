@@ -1,16 +1,14 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "core/canvas.hh"
 #include "world/world.hh"
 
 class Window
 {
 private:
     sf::RenderWindow window;
-    int w;  // width  of the <Window>
-    int h;  // height of the <Window>
-
-    sf::Uint8 *pixels;
+    Canvas canvas;
 
     sf::Texture texture;
     sf::Sprite sprite;

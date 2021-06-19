@@ -1,6 +1,6 @@
 #include <ostream>
+#include "core/canvas.hh"
 #include "math/common.hh"
-#include "render/pixel.hh"
 #include "render/line.hh"
 #include "world/triangle.hh"
 
@@ -30,7 +30,7 @@ bool Triangle::inside(int x, int y)
         && edgetest(x, y, this->v2, this->v0);
 }
 
-void Triangle::rasterize(sf::Uint8 *pixels, int w, sf::Color c)
+void Triangle::rasterize(Canvas &canvas, sf::Color c)
 {
     int xmin = min(3, this->v0.x, this->v1.x, this->v2.x);
     int xmax = max(3, this->v0.x, this->v1.x, this->v2.x) + 1;
@@ -40,19 +40,19 @@ void Triangle::rasterize(sf::Uint8 *pixels, int w, sf::Color c)
     for (int x = xmin; x <= xmax; x++)
         for (int y = ymin; y <= ymax; y++)
             if (this->inside(x, y))
-                set(pixels, w, x, y, c);
+                canvas.set(x, y, c);
 }
 
-void Triangle::draw(sf::Uint8 *pixels, int w, int h, sf::Color c, bool fill, bool lines)
+void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
 {
     if (lines)
     {
-        draw_line(pixels, w, h, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Red, 10);
-        draw_line(pixels, w, h, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Red, 10);
-        draw_line(pixels, w, h, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Red, 10);
+        draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Magenta, 10);
+        draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Magenta, 10);
+        draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Magenta, 10);
     }
     if (fill)
-        this->rasterize(pixels, w, c);
+        this->rasterize(canvas, c);
 }
 
 std::ostream &operator<<(std::ostream &os, const Triangle &t)

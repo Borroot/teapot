@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <string>
 #include <cstring>
+#include "core/canvas.hh"
 #include "core/window.hh"
 #include "render/render.hh"
 
@@ -10,14 +11,10 @@ Window::Window(int w, int h)
     this->window.create(sf::VideoMode(w, h), "Teapot");
     this->window.setFramerateLimit(500);
 
-    this->w = w;
-    this->h = h;
+    this->canvas = *(new Canvas(w, h));
+    background(this->canvas, sf::Color::Black);
 
-    // times 4 since every pixel is 4 bytes RGBA
-    this->pixels = new sf::Uint8[this->w * this->h * 4];
-    background(pixels, this->w, this->h, sf::Color::Black);
-
-    if (!this->texture.create(this->w, this->h))
+    if (!this->texture.create(w, h))
         throw std::runtime_error("Could not create texture.");
 
     if (!this->font.loadFromFile("res/fonts/SansMono-Regular.ttf"))
@@ -31,7 +28,6 @@ bool Window::isopen()
 
 void Window::close()
 {
-    delete this->pixels;
     this->window.close();
 }
 
@@ -53,9 +49,9 @@ sf::Text Window::fps()
 
 void Window::draw(World &world)
 {
-    render(world, this->pixels, this->w, this->h);
+    render(world, canvas);
 
-    this->texture.update(this->pixels);
+    this->texture.update(this->canvas.pixels);
     this->sprite.setTexture(this->texture);
 
     this->window.clear();

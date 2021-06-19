@@ -1,19 +1,19 @@
 #include <SFML/Graphics.hpp>
+#include "core/canvas.hh"
 #include "math/common.hh"
 #include "math/vector.hh"
 #include "render/line.hh"
-#include "render/pixel.hh"
 #include "render/render.hh"
 
-void render(World &world, sf::Uint8 *pixels, int w, int h)
+void render(World &world, Canvas &canvas)
 {
     Triangle triangle(Vec4(100, 100, 0), Vec4(200, 500, 0), Vec4(500, 200, 0));
-    triangle.draw(pixels, w, h, sf::Color::White, true, true);
+    triangle.draw(canvas, sf::Color::White, true, true);
 }
 
-void background(sf::Uint8 *pixels, int w, int h, sf::Color c)
+void background(Canvas &canvas, sf::Color c)
 {
-    for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
-            set(pixels, w, x, y, c);
+    for (int y = 0; y < canvas.h; y++)
+        for (int x = 0; x < canvas.w; x++)
+            canvas.set(x, y, c);
 }
