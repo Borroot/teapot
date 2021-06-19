@@ -7,8 +7,8 @@
 class Mesh
 {
 public:
-    std::vector<Vec4> vertices;
     std::vector<Triangle> triangles;
 
     Mesh(const std::string &);
+    Mesh(const Mesh &);
 };

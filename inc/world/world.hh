@@ -10,4 +10,5 @@ private:
 
 public:
     World(std::vector<Mesh> &);
+    World(const World &);
 };
