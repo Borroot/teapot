@@ -1,12 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "math/common.hh"
+#include "math/vector.hh"
 #include "render/line.hh"
 #include "render/pixel.hh"
 #include "render/render.hh"
 
 void render(World &world, sf::Uint8 *pixels, int w, int h)
 {
-    draw_line(pixels, w, h, 0, 100, 120, 600, sf::Color::White, 80);
+    Triangle triangle(Vec4(100, 100, 0), Vec4(200, 500, 0), Vec4(500, 200, 0));
+    triangle.draw(pixels, w, h, sf::Color::White, true, true);
 }
 
 void background(sf::Uint8 *pixels, int w, int h, sf::Color c)
