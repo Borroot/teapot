@@ -7,7 +7,7 @@ Test(vector, Vec4_declaration)
 {
     Vec4 v(2, 3, 4);
     cr_assert_eq(v.w, 1);
-    cr_assert_throw(new Vec4(1, 1, 1, 0), std::domain_error);
+    cr_assert_throw(Vec4(1, 1, 1, 0), std::domain_error);
 }
 
 Test(vector, length)
@@ -24,15 +24,15 @@ Test(vector, length)
 Test(vector, normalize)
 {
     Vec3 v1(0, 0, 0);
-    cr_assert_eq(v1.normalize(), *(new Vec3(0, 0, 0)));
+    cr_assert_eq(v1.normalize(), Vec3(0, 0, 0));
 
     Vec3 v2(1, 0, 0);
     Vec3 v3(3, 0, 0);
-    cr_assert_eq(v2.normalize(), *(new Vec3(1, 0, 0)));
-    cr_assert_eq(v3.normalize(), *(new Vec3(1, 0, 0)));
+    cr_assert_eq(v2.normalize(), Vec3(1, 0, 0));
+    cr_assert_eq(v3.normalize(), Vec3(1, 0, 0));
 
     Vec4 v4(3, 0, 0);
-    cr_assert_eq(v4.normalize(), *(new Vec4(1, 0, 0, 1)));
+    cr_assert_eq(v4.normalize(), Vec4(1, 0, 0, 1));
 
     Vec3 v5(2, -3, 4);
     cr_assert_float_eq(v5.normalize().length(), 1, 0.01);
@@ -66,35 +66,35 @@ Test(vector, cross)
 {
     Vec3 v1(1, 0, 0);
     Vec3 v2(0, 1, 0);
-    cr_assert_eq(v1 ^ v2, *(new Vec3(0, 0, 1)));
-    cr_assert_eq(v1, *(new Vec3(1, 0, 0)));
-    cr_assert_eq(v2, *(new Vec3(0, 1, 0)));
+    cr_assert_eq(v1 ^ v2, Vec3(0, 0, 1));
+    cr_assert_eq(v1, Vec3(1, 0, 0));
+    cr_assert_eq(v2, Vec3(0, 1, 0));
 
     v1 ^= v2;
-    cr_assert_eq(v1, *(new Vec3(0, 0, 1)));
-    cr_assert_eq(v2, *(new Vec3(0, 1, 0)));
+    cr_assert_eq(v1, Vec3(0, 0, 1));
+    cr_assert_eq(v2, Vec3(0, 1, 0));
 
     Vec3 v3(2, 4, 7);
     Vec3 v4(5, 4, 2);
-    cr_assert_eq(v3 ^ v4, *(new Vec3(-20, 31, -12)));
+    cr_assert_eq(v3 ^ v4, Vec3(-20, 31, -12));
 
     Vec4 v5(1, 0, 0);
     Vec4 v6(0, 1, 0);
-    cr_assert_eq(v5 ^ v6, *(new Vec4(0, 0, 1, 1)));
-    cr_assert_eq(v5, *(new Vec4(1, 0, 0, 1)));
-    cr_assert_eq(v6, *(new Vec4(0, 1, 0, 1)));
+    cr_assert_eq(v5 ^ v6, Vec4(0, 0, 1, 1));
+    cr_assert_eq(v5, Vec4(1, 0, 0, 1));
+    cr_assert_eq(v6, Vec4(0, 1, 0, 1));
 
     v5 ^= v6;
-    cr_assert_eq(v5, *(new Vec4(0, 0, 1, 1)));
-    cr_assert_eq(v6, *(new Vec4(0, 1, 0, 1)));
+    cr_assert_eq(v5, Vec4(0, 0, 1, 1));
+    cr_assert_eq(v6, Vec4(0, 1, 0, 1));
 
     Vec4 v7(2, 4, 7);
     Vec4 v8(5, 4, 2);
-    cr_assert_eq(v7 ^ v8, *(new Vec4(-20, 31, -12, 1)));
+    cr_assert_eq(v7 ^ v8, Vec4(-20, 31, -12, 1));
 
     Vec4 v9(4, 8, 14, 2);
     Vec4 v0(10, 8, 4, 2);
-    cr_assert_eq(v9 ^ v0, *(new Vec4(-20, 31, -12, 1)));
+    cr_assert_eq(v9 ^ v0, Vec4(-20, 31, -12, 1));
 
     Vec4 v10(1, 2, 3, 1);
     v10.w = 0;
@@ -127,27 +127,27 @@ Test(vector, addition)
 {
     Vec3 v1(1, 2, 3);
     Vec3 v2(1, 2, 3);
-    cr_assert_eq(v1 + v2, *(new Vec3(2, 4, 6)));
-    cr_assert_eq(v1, *(new Vec3(1, 2, 3)));
-    cr_assert_eq(v2, *(new Vec3(1, 2, 3)));
+    cr_assert_eq(v1 + v2, Vec3(2, 4, 6));
+    cr_assert_eq(v1, Vec3(1, 2, 3));
+    cr_assert_eq(v2, Vec3(1, 2, 3));
 
     v1 += v2;
-    cr_assert_eq(v1, *(new Vec3(2, 4, 6)));
-    cr_assert_eq(v2, *(new Vec3(1, 2, 3)));
+    cr_assert_eq(v1, Vec3(2, 4, 6));
+    cr_assert_eq(v2, Vec3(1, 2, 3));
 
     Vec4 v3(1, 2, 3, 1);
     Vec4 v4(1, 2, 3, 1);
-    cr_assert_eq(v3 + v4, *(new Vec4(2, 4, 6, 1)));
-    cr_assert_eq(v3, *(new Vec4(1, 2, 3, 1)));
-    cr_assert_eq(v4, *(new Vec4(1, 2, 3, 1)));
+    cr_assert_eq(v3 + v4, Vec4(2, 4, 6, 1));
+    cr_assert_eq(v3, Vec4(1, 2, 3, 1));
+    cr_assert_eq(v4, Vec4(1, 2, 3, 1));
 
     v3 += v4;
-    cr_assert_eq(v3, *(new Vec4(2, 4, 6, 1)));
-    cr_assert_eq(v4, *(new Vec4(1, 2, 3, 1)));
+    cr_assert_eq(v3, Vec4(2, 4, 6, 1));
+    cr_assert_eq(v4, Vec4(1, 2, 3, 1));
 
     Vec4 v5(2, 4, 6, 2);
     Vec4 v6(3, 6, 9, 3);
-    cr_assert_eq(v5 + v6, *(new Vec4(2, 4, 6, 1)));
+    cr_assert_eq(v5 + v6, Vec4(2, 4, 6, 1));
 
     Vec4 v7(1, 2, 3, 1);
     v7.w = 0;
@@ -159,27 +159,27 @@ Test(vector, subtraction)
 {
     Vec3 v1(1, 2, 3);
     Vec3 v2(1, 2, 3);
-    cr_assert_eq(v1 - v2, *(new Vec3(0, 0, 0)));
-    cr_assert_eq(v1, *(new Vec3(1, 2, 3)));
-    cr_assert_eq(v2, *(new Vec3(1, 2, 3)));
+    cr_assert_eq(v1 - v2, Vec3(0, 0, 0));
+    cr_assert_eq(v1, Vec3(1, 2, 3));
+    cr_assert_eq(v2, Vec3(1, 2, 3));
 
     v1 -= v2;
-    cr_assert_eq(v1, *(new Vec3(0, 0, 0)));
-    cr_assert_eq(v2, *(new Vec3(1, 2, 3)));
+    cr_assert_eq(v1, Vec3(0, 0, 0));
+    cr_assert_eq(v2, Vec3(1, 2, 3));
 
     Vec4 v3(1, 2, 3, 1);
     Vec4 v4(1, 2, 3, 1);
-    cr_assert_eq(v3 - v4, *(new Vec4(0, 0, 0, 1)));
-    cr_assert_eq(v3, *(new Vec4(1, 2, 3, 1)));
-    cr_assert_eq(v4, *(new Vec4(1, 2, 3, 1)));
+    cr_assert_eq(v3 - v4, Vec4(0, 0, 0, 1));
+    cr_assert_eq(v3, Vec4(1, 2, 3, 1));
+    cr_assert_eq(v4, Vec4(1, 2, 3, 1));
 
     v3 -= v4;
-    cr_assert_eq(v3, *(new Vec4(0, 0, 0, 1)));
-    cr_assert_eq(v4, *(new Vec4(1, 2, 3, 1)));
+    cr_assert_eq(v3, Vec4(0, 0, 0, 1));
+    cr_assert_eq(v4, Vec4(1, 2, 3, 1));
 
     Vec4 v5(2, 4, 6, 2);
     Vec4 v6(3, 6, 9, 3);
-    cr_assert_eq(v5 - v6, *(new Vec4(0, 0, 0, 1)));
+    cr_assert_eq(v5 - v6, Vec4(0, 0, 0, 1));
 
     Vec4 v7(1, 2, 3, 1);
     v7.w = 0;
@@ -190,12 +190,12 @@ Test(vector, subtraction)
 Test(vector, casting)
 {
     Vec3 v1(2, 3, 4);
-    cr_assert_eq((Vec4)v1, *(new Vec4(2, 3, 4, 1)));
+    cr_assert_eq((Vec4)v1, Vec4(2, 3, 4, 1));
 
     Vec4 v2(2, 3, 4, 1);
     Vec4 v3(9, 3, 6, 3);
-    cr_assert_eq((Vec3)v2, *(new Vec3(2, 3, 4)));
-    cr_assert_eq((Vec3)v3, *(new Vec3(3, 1, 2)));
+    cr_assert_eq((Vec3)v2, Vec3(2, 3, 4));
+    cr_assert_eq((Vec3)v3, Vec3(3, 1, 2));
 
     Vec4 v4(2, 3, 4, 1);
     v4.w = 0;

@@ -11,7 +11,7 @@ Window::Window(int w, int h)
     this->window.create(sf::VideoMode(w, h), "Teapot");
     this->window.setFramerateLimit(500);
 
-    this->canvas = *(new Canvas(w, h));
+    this->canvas = Canvas(w, h);
     background(this->canvas, sf::Color::Black);
 
     if (!this->texture.create(w, h))

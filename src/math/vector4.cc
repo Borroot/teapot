@@ -60,10 +60,10 @@ Vec4 Vec4::operator^(const Vec4 &v)
     Vec3 v1 = (Vec3)*this;  // make w = 1
     Vec3 v2 = (Vec3)(Vec4)v;
 
-    return *(new Vec4(
+    return Vec4(
         v1.y * v2.z - v1.z * v2.y,
         v1.z * v2.x - v1.x * v2.z,
-        v1.x * v2.y - v1.y * v2.x));
+        v1.x * v2.y - v1.y * v2.x);
 }
 
 Vec4 &Vec4::operator^=(const Vec4 &v)
@@ -103,20 +103,20 @@ Vec4 Vec4::operator+(const Vec4 &v)
 {
     if (this->w == 0 || v.w == 0)
         throw std::domain_error("divide by zero since w=0");
-    return *(new Vec4(
+    return Vec4(
         this->x / this->w + v.x / v.w,
         this->y / this->w + v.y / v.w,
-        this->z / this->w + v.z / v.w));
+        this->z / this->w + v.z / v.w);
 }
 
 Vec4 Vec4::operator-(const Vec4 &v)
 {
     if (this->w == 0 || v.w == 0)
         throw std::domain_error("divide by zero since w=0");
-    return *(new Vec4(
+    return Vec4(
         this->x / this->w - v.x / v.w,
         this->y / this->w - v.y / v.w,
-        this->z / this->w - v.z / v.w));
+        this->z / this->w - v.z / v.w);
 }
 
 Vec4 &Vec4::operator+=(const Vec4 &v)
@@ -142,8 +142,8 @@ Vec4::operator Vec3()
     if (this->w == 0)
         throw std::domain_error("divide by zero since w=0");
     if (this->w == 1)
-        return *(new Vec3 (this->x, this->y, this->z));
-    return *(new Vec3 (this->x / this->w, this->y / this->w, this->z / this->w));
+        return Vec3 (this->x, this->y, this->z);
+    return Vec3 (this->x / this->w, this->y / this->w, this->z / this->w);
 }
 
 std::ostream &operator<<(std::ostream &os, const Vec4 &v)

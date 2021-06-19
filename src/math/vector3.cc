@@ -33,10 +33,10 @@ double Vec3::operator*(const Vec3 &v)
 
 Vec3 Vec3::operator^(const Vec3 &v)
 {
-    return *(new Vec3(
+    return Vec3(
         this->y * v.z - this->z * v.y,
         this->z * v.x - this->x * v.z,
-        this->x * v.y - this->y * v.x));
+        this->x * v.y - this->y * v.x);
 }
 
 Vec3 &Vec3::operator^=(const Vec3 &v)
@@ -63,12 +63,12 @@ bool Vec3::operator!=(const Vec3 &v)
 
 Vec3 Vec3::operator+(const Vec3 &v)
 {
-    return *(new Vec3(this->x + v.x, this->y + v.y, this->z + v.z));
+    return Vec3(this->x + v.x, this->y + v.y, this->z + v.z);
 }
 
 Vec3 Vec3::operator-(const Vec3 &v)
 {
-    return *(new Vec3(this->x - v.x, this->y - v.y, this->z - v.z));
+    return Vec3(this->x - v.x, this->y - v.y, this->z - v.z);
 }
 
 Vec3 &Vec3::operator+=(const Vec3 &v)
@@ -89,7 +89,7 @@ Vec3 &Vec3::operator-=(const Vec3 &v)
 
 Vec3::operator Vec4()
 {
-    return *(new Vec4(this->x, this->y, this->z, 1));
+    return Vec4(this->x, this->y, this->z, 1);
 }
 
 std::ostream &operator<<(std::ostream &os, const Vec3 &v)
