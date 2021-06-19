@@ -25,10 +25,9 @@ void draw_line(sf::Uint8 *pixels, int w, int x1, int y1, int x2, int y2, sf::Col
 
 void draw_line(sf::Uint8 *pixels, int w, int h, int x1, int y1, int x2, int y2, sf::Color c, int thickness)
 {
-    // TODO change this to rasterizing a rotated rectangle
     int dx = x2 - x1;
     int dy = y2 - y1;
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+    int steps = abs(dx) > abs(dy) ? abs(dx) * 2 : abs(dy) * 2;
 
     double xinc = (double)dx / steps;
     double yinc = (double)dy / steps;
@@ -41,10 +40,17 @@ void draw_line(sf::Uint8 *pixels, int w, int h, int x1, int y1, int x2, int y2, 
 
         for (int i = 2; i < thickness + 1; i++)
         {
-            if (i % 2)
-                set(pixels, w, x + (yinc * (i / 2)), y - (xinc * (i / 2)), c);
-            else
-                set(pixels, w, x - (yinc * (i / 2)), y + (xinc * (i / 2)), c);
+            if (i % 2) {
+                int xx = x + (yinc * (i / 2));
+                int yy = y - (xinc * (i / 2));
+                if (0 <= xx && xx < w && 0 <= y && y < h)
+                    set(pixels, w, xx, yy, c);
+            } else {
+                int xx = x - (yinc * (i / 2));
+                int yy = y + (xinc * (i / 2));
+                if (0 <= xx && xx < w && 0 <= y && y < h)
+                    set(pixels, w, xx, yy, c);
+            }
         }
         x += xinc;
         y += yinc;

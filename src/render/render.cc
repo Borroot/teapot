@@ -6,7 +6,7 @@
 
 void render(const World &world, sf::Uint8 *pixels, int w, int h)
 {
-    draw_line(pixels, w, h, 100, 100, 1000, 600, sf::Color::White, 5);
+    draw_line(pixels, w, h, 0, 100, 120, 600, sf::Color::White, 80);
 }
 
 void background(sf::Uint8 *pixels, int w, int h, sf::Color c)
