@@ -12,7 +12,7 @@ int main()
     Window window(1200, 800);
     while (window.isopen())
     {
-        window.draw(world);
+        window.draw(*(new World(world)));
 
         sf::Event event;
         while (window.poll(event))

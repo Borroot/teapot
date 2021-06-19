@@ -4,7 +4,7 @@
 #include "render/pixel.hh"
 #include "render/render.hh"
 
-void render(const World &world, sf::Uint8 *pixels, int w, int h)
+void render(World &world, sf::Uint8 *pixels, int w, int h)
 {
     draw_line(pixels, w, h, 0, 100, 120, 600, sf::Color::White, 80);
 }

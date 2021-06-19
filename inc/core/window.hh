@@ -30,6 +30,6 @@ public:
 
     bool poll(sf::Event &);
 
-    void draw(const World &);
+    void draw(World &);
     void set(int x, int y, sf::Color c);
 };

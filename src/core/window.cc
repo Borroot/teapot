@@ -51,7 +51,7 @@ sf::Text Window::fps()
     return text;
 }
 
-void Window::draw(const World &world)
+void Window::draw(World &world)
 {
     render(world, this->pixels, this->w, this->h);
 
