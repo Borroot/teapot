@@ -6,8 +6,8 @@ double min(unsigned int count, ...)
     va_list list;
     va_start(list, count);
 
-    double min;
-    for (unsigned int i = 0; i < count; i++)
+    double min = va_arg(list, double);
+    for (unsigned int i = 1; i < count; i++)
     {
         double current = va_arg(list, double);
         if (current < min)
@@ -23,8 +23,8 @@ double max(unsigned int count, ...)
     va_list list;
     va_start(list, count);
 
-    double max;
-    for (unsigned int i = 0; i < count; i++)
+    double max = va_arg(list, double);
+    for (unsigned int i = 1; i < count; i++)
     {
         double current = va_arg(list, double);
         if (current > max)
