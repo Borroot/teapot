@@ -6,15 +6,17 @@
 #include "core/window.hh"
 #include "render/render.hh"
 
-Window::Window(int w, int h)
+Window::Window(int w, int h, double scale)
 {
     this->window.create(sf::VideoMode(w, h), "Teapot");
     this->window.setFramerateLimit(500);
 
-    this->canvas = Canvas(w, h);
-    background(this->canvas, sf::Color::Black);
+    this->canvas = Canvas(w / scale, h / scale);
+    this->canvas.fill(sf::Color::Black);
 
-    if (!this->texture.create(w, h))
+    this->sprite.setScale(scale, scale);
+
+    if (!this->texture.create(w / scale, h / scale))
         throw std::runtime_error("Could not create texture.");
 
     if (!this->font.loadFromFile("res/fonts/SansMono-Regular.ttf"))

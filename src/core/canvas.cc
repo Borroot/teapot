@@ -15,3 +15,10 @@ void Canvas::set(int x, int y, sf::Color c)
     this->pixels[index + 2] = c.b;
     this->pixels[index + 3] = c.a;
 }
+
+void Canvas::fill(sf::Color c)
+{
+    for (int y = 0; y < this->h; y++)
+        for (int x = 0; x < this->w; x++)
+            this->set(x, y, c);
+}

@@ -13,4 +13,5 @@ public:
     Canvas(int w, int h);
 
     void set(int x, int y, sf::Color);
+    void fill(sf::Color);
 };
