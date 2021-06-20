@@ -50,14 +50,14 @@ void Triangle::rasterize(Canvas &canvas, sf::Color c)
 
 void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
 {
-    if (lines)
-    {
-        draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Magenta, 5);
-        draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Magenta, 5);
-        draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Magenta, 5);
-    }
     if (fill)
         this->rasterize(canvas, c);
+    if (lines)
+    {
+        draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Magenta, 2);
+        draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Magenta, 2);
+        draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Magenta, 2);
+    }
 }
 
 std::ostream &operator<<(std::ostream &os, const Triangle &t)
