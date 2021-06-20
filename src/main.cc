@@ -9,7 +9,7 @@ int main()
     std::vector<Mesh> meshes = {cube};
     World world(meshes);
 
-    Window window(1200, 800);
+    Window window(800, 600);
     while (window.isopen())
     {
         window.draw(*(new World(world)));

@@ -1,4 +1,5 @@
 #include <ostream>
+#include <assert.h>
 #include "core/canvas.hh"
 #include "math/common.hh"
 #include "render/line.hh"
@@ -32,10 +33,14 @@ bool Triangle::inside(int x, int y)
 
 void Triangle::rasterize(Canvas &canvas, sf::Color c)
 {
+    assert(0 <= this->v0.x && this->v0.x <= canvas.w && 0 <= this->v0.y && this->v0.y <= canvas.h);
+    assert(0 <= this->v1.x && this->v1.x <= canvas.w && 0 <= this->v1.y && this->v1.y <= canvas.h);
+    assert(0 <= this->v2.x && this->v2.x <= canvas.w && 0 <= this->v2.y && this->v2.y <= canvas.h);
+
     int xmin = min(3, this->v0.x, this->v1.x, this->v2.x);
-    int xmax = max(3, this->v0.x, this->v1.x, this->v2.x) + 1;
+    int xmax = max(3, this->v0.x, this->v1.x, this->v2.x);
     int ymin = min(3, this->v0.y, this->v1.y, this->v2.y);
-    int ymax = max(3, this->v0.y, this->v1.y, this->v2.y) + 1;
+    int ymax = max(3, this->v0.y, this->v1.y, this->v2.y);
 
     for (int x = xmin; x <= xmax; x++)
         for (int y = ymin; y <= ymax; y++)
@@ -47,9 +52,9 @@ void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
 {
     if (lines)
     {
-        draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Magenta, 10);
-        draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Magenta, 10);
-        draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Magenta, 10);
+        draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Magenta, 5);
+        draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Magenta, 5);
+        draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Magenta, 5);
     }
     if (fill)
         this->rasterize(canvas, c);
