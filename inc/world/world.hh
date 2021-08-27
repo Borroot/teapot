@@ -5,10 +5,9 @@
 
 class World
 {
-private:
+public:
     std::vector<Mesh> meshes;
 
-public:
     World(std::vector<Mesh> &);
     World(const World &);
 };

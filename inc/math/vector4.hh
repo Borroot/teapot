@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iosfwd>
+#include "math/matrix.hh"
 
 class Vec3;
 
@@ -29,6 +30,9 @@ public:
     Vec4 operator-(const Vec4 &);
     Vec4 &operator+=(const Vec4 &);
     Vec4 &operator-=(const Vec4 &);
+
+    Vec4 operator*(const Mat4 &);
+    Vec4 &operator*=(const Mat4 &);
 
     operator Vec3();
 

@@ -11,7 +11,7 @@ public:
     Mat4() {};
     Mat4(const double[4][4]);
 
-    double* operator[](const int &);
+    double* operator[](int);
     bool operator==(const Mat4 &);
     bool operator!=(const Mat4 &);
 

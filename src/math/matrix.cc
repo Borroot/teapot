@@ -1,5 +1,6 @@
 #include <iostream>
 #include "math/matrix.hh"
+#include "math/vector4.hh"
 
 Mat4::Mat4(const double other[4][4])
 {
@@ -8,7 +9,7 @@ Mat4::Mat4(const double other[4][4])
             this->matrix[y][x] = other[y][x];
 }
 
-double *Mat4::operator[](const int &index)
+double *Mat4::operator[](int index)
 {
     return this->matrix[index];
 }

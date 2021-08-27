@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "core/canvas.hh"
+#include "render/render.hh"
 #include "world/world.hh"
 
 class Window
@@ -9,6 +10,8 @@ class Window
 private:
     sf::RenderWindow window;
     Canvas canvas;
+
+    Render render;
 
     sf::Texture texture;
     sf::Sprite sprite;

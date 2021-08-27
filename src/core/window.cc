@@ -11,12 +11,17 @@ Window::Window(int w, int h, double scale)
     this->window.create(sf::VideoMode(w, h), "Teapot");
     this->window.setFramerateLimit(500);
 
-    this->canvas = Canvas(w / scale, h / scale);
+    double width = w / scale;
+    double height = h / scale;
+
+    this->canvas = Canvas(width, height);
     this->canvas.fill(sf::Color::Black);
+
+    this->render = Render(width, height);
 
     this->sprite.setScale(scale, scale);
 
-    if (!this->texture.create(w / scale, h / scale))
+    if (!this->texture.create(width, height))
         throw std::runtime_error("Could not create texture.");
 
     if (!this->font.loadFromFile("res/fonts/SansMono-Regular.ttf"))
@@ -51,7 +56,7 @@ sf::Text Window::fps()
 
 void Window::draw(World &world)
 {
-    render(world, canvas);
+    this->render.render(world, canvas);
 
     this->texture.update(this->canvas.pixels);
     this->sprite.setTexture(this->texture);
