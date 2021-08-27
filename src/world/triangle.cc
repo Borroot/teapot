@@ -26,13 +26,23 @@ bool Triangle::edgetest(int x, int y, const Vec4 &a, const Vec4 &b)
 
 bool Triangle::inside(int x, int y)
 {
+    assert(this->v0.w == 1 && this->v1.w == 1 && this->v2.w == 1);
     return edgetest(x, y, this->v0, this->v1)
         && edgetest(x, y, this->v1, this->v2)
         && edgetest(x, y, this->v2, this->v0);
 }
 
+void Triangle::remove_w()
+{
+    this->v0.remove_w();
+    this->v1.remove_w();
+    this->v2.remove_w();
+}
+
 void Triangle::rasterize(Canvas &canvas, sf::Color c)
 {
+    assert(this->v0.w == 1 && this->v1.w == 1 && this->v2.w == 1);
+
     assert(0 <= this->v0.x && this->v0.x <= canvas.w && 0 <= this->v0.y && this->v0.y <= canvas.h);
     assert(0 <= this->v1.x && this->v1.x <= canvas.w && 0 <= this->v1.y && this->v1.y <= canvas.h);
     assert(0 <= this->v2.x && this->v2.x <= canvas.w && 0 <= this->v2.y && this->v2.y <= canvas.h);
@@ -50,6 +60,7 @@ void Triangle::rasterize(Canvas &canvas, sf::Color c)
 
 void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
 {
+    this->remove_w();
     if (fill)
         this->rasterize(canvas, c);
     if (lines)

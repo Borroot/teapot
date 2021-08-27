@@ -21,16 +21,25 @@ Vec4::Vec4(double x, double y, double z)
     this->w = 1;
 }
 
+void Vec4::remove_w()
+{
+    if (w == 0)
+        throw std::domain_error("divide by zero since w=0");
+    this->x = x / this->w;
+    this->y = y / this->w;
+    this->z = z / this->w;
+    this->w = 1;
+}
+
 Vec4 &Vec4::normalize()
 {
-    Vec3 v = (Vec3)*this;  // make w = 1
-    double length = v.length();
+    this->remove_w();
+    double length = this->length();
     if (length != 0)
     {
-        this->x = v.x / length;
-        this->y = v.y / length;
-        this->z = v.z / length;
-        this->w = 1;
+        this->x = this->x / length;
+        this->y = this->y / length;
+        this->z = this->z / length;
     }
     return *this;
 }
@@ -55,30 +64,31 @@ double Vec4::operator*(const Vec4 &v)
         (this->z / this->w) * (v.z / v.w));
 }
 
-Vec4 Vec4::operator^(const Vec4 &v)
+Vec4 Vec4::operator^(const Vec4 &vector)
 {
-    Vec3 v1 = (Vec3)*this;  // make w = 1
-    Vec3 v2 = (Vec3)(Vec4)v;
+    Vec4 v = Vec4(vector);
+    v.remove_w();
+    this->remove_w();
 
     return Vec4(
-        v1.y * v2.z - v1.z * v2.y,
-        v1.z * v2.x - v1.x * v2.z,
-        v1.x * v2.y - v1.y * v2.x);
+        this->y * v.z - this->z * v.y,
+        this->z * v.x - this->x * v.z,
+        this->x * v.y - this->y * v.x);
 }
 
-Vec4 &Vec4::operator^=(const Vec4 &v)
+Vec4 &Vec4::operator^=(const Vec4 &vector)
 {
-    Vec3 v1 = (Vec3)*this;  // make w = 1
-    Vec3 v2 = (Vec3)(Vec4)v;
+    Vec4 v = Vec4(vector);
+    v.remove_w();
+    this->remove_w();
 
-    double x = v1.y * v2.z - v1.z * v2.y;
-    double y = v1.z * v2.x - v1.x * v2.z;
-    double z = v1.x * v2.y - v1.y * v2.x;
+    double x = this->y * v.z - this->z * v.y;
+    double y = this->z * v.x - this->x * v.z;
+    double z = this->x * v.y - this->y * v.x;
 
     this->x = x;
     this->y = y;
     this->z = z;
-    this->w = 1;
     return *this;
 }
 

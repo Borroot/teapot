@@ -23,6 +23,8 @@ public:
 
     static Mat4 translate(double, double, double);
     static Mat4 scale(double, double, double);
+    static Mat4 viewport(int w, int h);
+    static Mat4 projection(int w, int h, double fov, double far, double near);
 
     friend std::ostream &operator<<(std::ostream &, const Mat4 &);
 };

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include "math/matrix.hh"
 #include "math/vector4.hh"
 
@@ -81,8 +82,7 @@ Mat4 Mat4::translate(double x, double y, double z)
         {1, 0, 0, x},
         {0, 1, 0, y},
         {0, 0, 1, z},
-        {0, 0, 0, 1}
-    });
+        {0, 0, 0, 1}});
 }
 
 Mat4 Mat4::scale(double x, double y, double z)
@@ -91,8 +91,26 @@ Mat4 Mat4::scale(double x, double y, double z)
         {x, 0, 0, 0},
         {0, y, 0, 0},
         {0, 0, z, 0},
-        {0, 0, 0, 1}
-    });
+        {0, 0, 0, 1}});
+}
+
+Mat4 Mat4::viewport(int w, int h)
+{
+    return scale(w, h, 1);
+}
+
+Mat4 Mat4::projection(int w, int h, double fov, double far, double near)
+{
+    double fovrad = 1 / tan(fov * 0.5 / 180.0 * M_PI);
+    double aspect_ratio = (double)h / (double)w;
+
+    double projection[4][4] = {
+        {aspect_ratio * fovrad, 0, 0, 0},
+        {0, fovrad, 0, 0},
+        {0, 0, far / (far - near), (-far * near) / (far - near)},
+        {0, 0, 1, 0}};
+
+    return Mat4(projection);
 }
 
 std::ostream &operator<<(std::ostream &os, const Mat4 &matrix)

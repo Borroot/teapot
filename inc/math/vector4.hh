@@ -13,6 +13,8 @@ public:
     Vec4(double x, double y, double z, double w);
     Vec4(double x, double y, double z);
 
+    void remove_w();  // make w = 1
+
     Vec4 &normalize();
     double length();
     double dot(const Vec4 &);

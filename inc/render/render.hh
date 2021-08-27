@@ -7,10 +7,8 @@
 class Render
 {
 private:
-    Mat4 proj;      // projection matrix
-    Mat4 viewport;  // viewport matrix
-
-    static Mat4 projection(int w, int h, double fov, double far, double near);
+    Mat4 projection;
+    Mat4 viewport;
 
 public:
     Render() {};
