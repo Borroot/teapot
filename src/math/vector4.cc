@@ -1,7 +1,6 @@
 #include <iostream>
 #include <math.h>
 #include <stdexcept>
-#include "math/matrix.hh"
 #include "math/vector.hh"
 
 Vec4::Vec4(double x, double y, double z, double w)
@@ -135,31 +134,6 @@ Vec4 &Vec4::operator-=(const Vec4 &v)
     this->y = this->y / this->w - v.y / v.w;
     this->z = this->z / this->w - v.z / v.w;
     this->w = 1;
-    return *this;
-}
-
-Vec4 Vec4::operator*(const Mat4 &matrix)
-{
-    Vec4 result = Vec4();
-    Mat4 m = (Mat4)matrix;
-
-    result.x = this->x * m[0][0] + this->y * m[1][0] + this->z * m[2][0] + this->w * m[3][0];
-    result.y = this->x * m[0][1] + this->y * m[1][1] + this->z * m[2][1] + this->w * m[3][1];
-    result.z = this->x * m[0][2] + this->y * m[1][2] + this->z * m[2][2] + this->w * m[3][2];
-    result.w = this->x * m[0][3] + this->y * m[1][3] + this->z * m[2][3] + this->w * m[3][3];
-
-    return result;
-}
-
-Vec4 &Vec4::operator*=(const Mat4 &m)
-{
-    Vec4 result = Vec4(this->x, this->y, this->z, this->w) * m;
-
-    this->x = result.x;
-    this->y = result.y;
-    this->z = result.z;
-    this->w = result.w;
-
     return *this;
 }
 

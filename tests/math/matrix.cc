@@ -70,6 +70,33 @@ Test(matrix, Mat4_multiplication)
     cr_assert_eq(matrix2, matrix2_copy);
 }
 
+Test(matrix, Mat4_multiplication_Vec4)
+{
+    Mat4 matrix(new double[4][4]{
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 1, 2, 3},
+        {4, 5, 6, 7}});
+
+    Vec4 vector = Vec4(4, 6, 8, 2);
+    Vec4 result = Vec4(48, 128, 64, 108);
+
+    cr_assert_eq(matrix * vector, result);
+}
+
+Test(matrix, Mat4_translate)
+{
+    Vec4 vector = Vec4(4, 6, 8, 2);
+    cr_assert_eq(Mat4::translate(-2, -3, -4) * vector, Vec4(0, 0, 0, 1));
+}
+
+Test(matrix, Mat4_scale)
+{
+    Vec4 vector = Vec4(2, 3, 4, 2);
+    cr_assert_eq(Mat4::scale(2, 2, 2) * vector, Vec4(2, 3, 4, 1));
+    cr_assert_eq(Mat4::scale(0.5, 0.5, 0.5) * vector, Vec4(2, 3, 4, 4));
+}
+
 Test(matrix, Mat4_print, .init = cr_redirect_stdout)
 {
     Mat4 matrix(new double[4][4]{

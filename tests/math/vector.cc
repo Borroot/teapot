@@ -187,8 +187,6 @@ Test(vector, subtraction)
     cr_assert_throw(v7 - v6, std::domain_error);
 }
 
-// TODO Test Vec4 * Mat4.
-
 Test(vector, casting)
 {
     Vec3 v1(2, 3, 4);

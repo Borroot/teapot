@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iosfwd>
+#include "math/vector4.hh"
 
 class Mat4
 {
@@ -17,6 +18,11 @@ public:
 
     Mat4 operator*(const Mat4 &);
     Mat4 &operator*=(const Mat4 &);
+
+    Vec4 operator*(const Vec4 &);
+
+    static Mat4 translate(double, double, double);
+    static Mat4 scale(double, double, double);
 
     friend std::ostream &operator<<(std::ostream &, const Mat4 &);
 };

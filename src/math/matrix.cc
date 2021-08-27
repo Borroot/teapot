@@ -63,6 +63,38 @@ Mat4 &Mat4::operator*=(const Mat4 &other)
     return *this;
 }
 
+Vec4 Mat4::operator*(const Vec4 &v)
+{
+    Vec4 result = Vec4();
+
+    result.x = v.x * this->matrix[0][0] + v.y * this->matrix[0][1] + v.z * this->matrix[0][2] + v.w * this->matrix[0][3];
+    result.y = v.x * this->matrix[1][0] + v.y * this->matrix[1][1] + v.z * this->matrix[1][2] + v.w * this->matrix[1][3];
+    result.z = v.x * this->matrix[2][0] + v.y * this->matrix[2][1] + v.z * this->matrix[2][2] + v.w * this->matrix[2][3];
+    result.w = v.x * this->matrix[3][0] + v.y * this->matrix[3][1] + v.z * this->matrix[3][2] + v.w * this->matrix[3][3];
+
+    return result;
+}
+
+Mat4 Mat4::translate(double x, double y, double z)
+{
+    return Mat4(new double[4][4]{
+        {1, 0, 0, x},
+        {0, 1, 0, y},
+        {0, 0, 1, z},
+        {0, 0, 0, 1}
+    });
+}
+
+Mat4 Mat4::scale(double x, double y, double z)
+{
+    return Mat4(new double[4][4]{
+        {x, 0, 0, 0},
+        {0, y, 0, 0},
+        {0, 0, z, 0},
+        {0, 0, 0, 1}
+    });
+}
+
 std::ostream &operator<<(std::ostream &os, const Mat4 &matrix)
 {
     for (short y = 0; y < 4; y++)
