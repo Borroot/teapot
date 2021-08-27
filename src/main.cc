@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include "core/window.hh"
 #include "world/mesh.hh"
@@ -10,9 +11,24 @@ int main()
     World world(meshes);
 
     Window window(1200, 900, 3);
+
+    sf::Clock clock;
+    sf::Time prevtime = clock.getElapsedTime();
+    double rad = 0;
+
     while (window.isopen())
     {
-        window.draw(*(new World(world)));
+        sf::Time currtime = clock.getElapsedTime();
+        rad += 1 * (currtime.asSeconds() - prevtime.asSeconds());
+        prevtime = currtime;
+
+        Mat4 rotx = Mat4::rotx(rad);
+        Mat4 rotz = Mat4::rotz(rad + 0.5);
+
+        World world_clone = World(world);
+        rotx * rotz * world_clone.meshes[0];
+
+        window.draw(world_clone);
 
         sf::Event event;
         while (window.poll(event))

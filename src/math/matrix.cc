@@ -76,6 +76,19 @@ Vec4 Mat4::operator*(const Vec4 &v)
     return result;
 }
 
+void Mat4::operator*(Triangle &triangle)
+{
+    triangle.v0 = *this * triangle.v0;
+    triangle.v1 = *this * triangle.v1;
+    triangle.v2 = *this * triangle.v2;
+}
+
+void Mat4::operator*(Mesh &mesh)
+{
+    for (int i = 0; i < (int)mesh.triangles.size(); i++)
+        *this * mesh.triangles[i];
+}
+
 Mat4 Mat4::translate(double x, double y, double z)
 {
     return Mat4(new double[4][4]{
@@ -111,6 +124,42 @@ Mat4 Mat4::projection(int w, int h, double fov, double far, double near)
         {0, 0, 1, 0}};
 
     return Mat4(projection);
+}
+
+Mat4 Mat4::rotx(double rad)
+{
+    double c = cos(rad);
+    double s = sin(rad);
+
+    return Mat4(new double[4][4]{
+        {1, 0, 0, 0},
+        {0, c, -s, 0},
+        {0, s, c, 0},
+        {0, 0, 0, 1}});
+}
+
+Mat4 Mat4::roty(double rad)
+{
+    double c = cos(rad);
+    double s = sin(rad);
+
+    return Mat4(new double[4][4]{
+        {c, 0, s, 0},
+        {0, 1, 0, 0},
+        {-s, 0, c, 0},
+        {0, 0, 0, 1}});
+}
+
+Mat4 Mat4::rotz(double rad)
+{
+    double c = cos(rad);
+    double s = sin(rad);
+
+    return Mat4(new double[4][4]{
+        {c, -s, 0, 0},
+        {s, c, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}});
 }
 
 std::ostream &operator<<(std::ostream &os, const Mat4 &matrix)

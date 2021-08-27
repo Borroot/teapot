@@ -84,6 +84,32 @@ Test(matrix, Mat4_multiplication_Vec4)
     cr_assert_eq(matrix * vector, result);
 }
 
+Test(matrix, Mat4_multiplication_Triangle)
+{
+    Triangle triangle = Triangle(Vec4(1, 1, 1), Vec4(2, 2, 2), Vec4(3, 3, 3));
+    Mat4 trans = Mat4::translate(-1, -1, -1);
+    trans * triangle;
+
+    cr_assert_eq(triangle.v0, Vec4(0, 0, 0));
+    cr_assert_eq(triangle.v1, Vec4(1, 1, 1));
+    cr_assert_eq(triangle.v2, Vec4(2, 2, 2));
+}
+
+Test(matrix, Mat4_multiplication_Mesh)
+{
+    Triangle triangle = Triangle(Vec4(1, 1, 1), Vec4(2, 2, 2), Vec4(3, 3, 3));
+    Mat4 trans = Mat4::translate(-1, -1, -1);
+
+    Mesh mesh = Mesh();
+    mesh.triangles.push_back(triangle);
+
+    trans * mesh;
+
+    cr_assert_eq(mesh.triangles[0].v0, Vec4(0, 0, 0));
+    cr_assert_eq(mesh.triangles[0].v1, Vec4(1, 1, 1));
+    cr_assert_eq(mesh.triangles[0].v2, Vec4(2, 2, 2));
+}
+
 Test(matrix, Mat4_translate)
 {
     Vec4 vector = Vec4(4, 6, 8, 2);

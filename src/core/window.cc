@@ -56,6 +56,7 @@ sf::Text Window::fps()
 
 void Window::draw(World &world)
 {
+    this->canvas.fill(sf::Color::Black);
     this->render.render(world, canvas);
 
     this->texture.update(this->canvas.pixels);

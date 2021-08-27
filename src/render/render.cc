@@ -15,20 +15,14 @@ Render::Render(int w, int h)
 
 void Render::render(World &world, Canvas &canvas)
 {
-    // Triangle triangle(Vec4(100, 50, 0), Vec4(200, 250, 0), Vec4(300, 150, 0));
-    // triangle.draw(canvas, sf::Color::White, true, true);
-
-    Mat4 trans = Mat4::translate(1, 1, 6);
-    Mat4 scale = Mat4::scale(0.5, 0.5, 0.5);
+    Mat4 transz = Mat4::translate(0, 0, 5);
+    Mat4 transmid = Mat4::translate(0.5, 0.5, 0);
 
     for (Mesh mesh : world.meshes)
     {
         for (Triangle triangle : mesh.triangles)
         {
-            triangle.v0 = this->viewport * this->projection * scale * trans * triangle.v0;
-            triangle.v1 = this->viewport * this->projection * scale * trans * triangle.v1;
-            triangle.v2 = this->viewport * this->projection * scale * trans * triangle.v2;
-
+            this->viewport * transmid * this->projection * transz * triangle;
             triangle.draw(canvas, sf::Color::White, false, true);
         }
     }
