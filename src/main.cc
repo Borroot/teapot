@@ -6,8 +6,9 @@
 
 int main()
 {
-    Mesh cube("res/objects/cube.obj");
-    std::vector<Mesh> meshes = {cube};
+    // Mesh cube("res/objects/cube.obj");
+    Mesh teapot("res/objects/teapot.obj");
+    std::vector<Mesh> meshes = {teapot};
     World world(meshes);
 
     Window window(1200, 900, 3);
