@@ -24,5 +24,7 @@ public:
     void rasterize(Canvas &, sf::Color);
     void draw(Canvas &, sf::Color, bool fill, bool lines);
 
+    Vec3 normal();
+
     friend std::ostream &operator<<(std::ostream &, const Triangle &);
 };

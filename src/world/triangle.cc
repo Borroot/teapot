@@ -2,6 +2,7 @@
 #include <assert.h>
 #include "core/canvas.hh"
 #include "math/common.hh"
+#include "math/vector.hh"
 #include "render/line.hh"
 #include "world/triangle.hh"
 
@@ -69,6 +70,11 @@ void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
         draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Magenta, 2);
         draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Magenta, 2);
     }
+}
+
+Vec3 Triangle::normal()
+{
+    return (this->v1 - this->v0).normalize() ^ (this->v2 - this->v0).normalize();
 }
 
 std::ostream &operator<<(std::ostream &os, const Triangle &t)

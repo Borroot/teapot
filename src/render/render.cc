@@ -15,15 +15,19 @@ Render::Render(int w, int h)
 
 void Render::render(World &world, Canvas &canvas)
 {
+    Vec3 camera = Vec3(0, 0, 0);
     Mat4 transz = Mat4::translate(0, 0, 5);
-    Mat4 transmid = Mat4::translate(0.5, 0.5, 0);
 
     for (Mesh mesh : world.meshes)
     {
         for (Triangle triangle : mesh.triangles)
         {
-            this->viewport * transmid * this->projection * transz * triangle;
-            triangle.draw(canvas, sf::Color::White, false, true);
+            transz * triangle;
+            if ((triangle.v0 - camera) * triangle.normal() < 0)  // backface culling
+            {
+                this->viewport * this->projection * triangle;
+                triangle.draw(canvas, sf::Color::White, false, true);
+            }
         }
     }
 }

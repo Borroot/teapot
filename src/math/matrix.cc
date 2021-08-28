@@ -109,7 +109,7 @@ Mat4 Mat4::scale(double x, double y, double z)
 
 Mat4 Mat4::viewport(int w, int h)
 {
-    return scale(w, h, 1);
+    return scale(w, h, 1) * translate(0.5, 0.5, 0);
 }
 
 Mat4 Mat4::projection(int w, int h, double fov, double far, double near)
