@@ -6,9 +6,8 @@
 
 int main()
 {
-    // Mesh cube("res/objects/cube.obj");
-    Mesh teapot("res/objects/teapot.obj");
-    std::vector<Mesh> meshes = {teapot};
+    Mesh axis("res/objects/axis.obj");
+    std::vector<Mesh> meshes = {axis};
     World world(meshes);
 
     Window window(1200, 900, 3);
@@ -23,11 +22,10 @@ int main()
         rad += 1 * (currtime.asSeconds() - prevtime.asSeconds());
         prevtime = currtime;
 
-        Mat4 rotx = Mat4::rotx(rad);
-        Mat4 rotz = Mat4::rotz(rad + 0.5);
-
         World world_clone = World(world);
-        rotx * rotz * world_clone.meshes[0];
+
+        // Mat4 rot = Mat4::rotx(rad);
+        // rot * world_clone.meshes[0];
 
         window.draw(world_clone);
 
