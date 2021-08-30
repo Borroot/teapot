@@ -9,7 +9,7 @@ class Vec4
 public:
     double x, y, z, w;
 
-    Vec4() {};
+    Vec4() = default;
     Vec4(double x, double y, double z, double w);
     Vec4(double x, double y, double z);
 

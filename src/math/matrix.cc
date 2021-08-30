@@ -31,7 +31,7 @@ bool Mat4::operator!=(const Mat4 &other)
 
 Mat4 Mat4::operator*(const Mat4 &other)
 {
-    Mat4 result = Mat4();
+    Mat4 result;
     for (short y = 0; y < 4; y++)
     {
         for (short x = 0; x < 4; x++)
@@ -66,7 +66,7 @@ Mat4 &Mat4::operator*=(const Mat4 &other)
 
 Vec4 Mat4::operator*(const Vec4 &v)
 {
-    Vec4 result = Vec4();
+    Vec4 result;
 
     result.x = v.x * this->matrix[0][0] + v.y * this->matrix[0][1] + v.z * this->matrix[0][2] + v.w * this->matrix[0][3];
     result.y = v.x * this->matrix[1][0] + v.y * this->matrix[1][1] + v.z * this->matrix[1][2] + v.w * this->matrix[1][3];

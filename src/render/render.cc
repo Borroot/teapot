@@ -18,7 +18,7 @@ Render::Render(int w, int h)
 void Render::render(World &world, Canvas &canvas)
 {
     Vec3 light = Vec3(0, 0, -1).normalize();
-    Vec3 camera = Vec3(0, 0, 0);
+    Vec3 camera(0, 0, 0);
     Mat4 transz = Mat4::translate(0, 0, 3);
 
     std::vector<Triangle> triangles;

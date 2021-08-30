@@ -18,6 +18,7 @@ public:
     Vec4 v1;
     Vec4 v2;
 
+    Triangle() = default;
     Triangle(const Vec4, const Vec4, const Vec4);
     Triangle(const Triangle &);
 

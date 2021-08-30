@@ -9,7 +9,7 @@ class Vec3
 public:
     double x, y, z;
 
-    Vec3() {};
+    Vec3() = default;
     Vec3(double x, double y, double z);
 
     Vec3 &normalize();

@@ -11,7 +11,7 @@ private:
     Mat4 viewport;
 
 public:
-    Render() {};
+    Render() = default;
     Render(int w, int h);
 
     void render(World &, Canvas &);

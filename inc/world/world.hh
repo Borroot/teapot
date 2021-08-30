@@ -8,6 +8,7 @@ class World
 public:
     std::vector<Mesh> meshes;
 
+    World() = default;
     World(std::vector<Mesh> &);
     World(const World &);
 };

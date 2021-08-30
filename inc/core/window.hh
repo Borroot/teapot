@@ -24,6 +24,7 @@ private:
     sf::Text fps();
 
 public:
+    Window() = default;
     Window(int w, int h, double scale);
 
     bool isopen();

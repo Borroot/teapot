@@ -5,7 +5,7 @@
 
 Test(matrix, Mat4_indexing)
 {
-    Mat4 matrix = Mat4();
+    Mat4 matrix;
 
     for (short y = 0; y < 4; y++)
         for (short x = 0; x < 4; x++)
@@ -18,8 +18,8 @@ Test(matrix, Mat4_indexing)
 
 Test(matrix, Mat4_equality)
 {
-    Mat4 matrix1 = Mat4();
-    Mat4 matrix2 = Mat4();
+    Mat4 matrix1;
+    Mat4 matrix2;
 
     for (short y = 0; y < 4; y++)
     {
@@ -78,15 +78,15 @@ Test(matrix, Mat4_multiplication_Vec4)
         {9, 1, 2, 3},
         {4, 5, 6, 7}});
 
-    Vec4 vector = Vec4(4, 6, 8, 2);
-    Vec4 result = Vec4(48, 128, 64, 108);
+    Vec4 vector(4, 6, 8, 2);
+    Vec4 result(48, 128, 64, 108);
 
     cr_assert_eq(matrix * vector, result);
 }
 
 Test(matrix, Mat4_multiplication_Triangle)
 {
-    Triangle triangle = Triangle(Vec4(1, 1, 1), Vec4(2, 2, 2), Vec4(3, 3, 3));
+    Triangle triangle(Vec4(1, 1, 1), Vec4(2, 2, 2), Vec4(3, 3, 3));
     Mat4 trans = Mat4::translate(-1, -1, -1);
     trans * triangle;
 
@@ -97,10 +97,10 @@ Test(matrix, Mat4_multiplication_Triangle)
 
 Test(matrix, Mat4_multiplication_Mesh)
 {
-    Triangle triangle = Triangle(Vec4(1, 1, 1), Vec4(2, 2, 2), Vec4(3, 3, 3));
+    Triangle triangle(Vec4(1, 1, 1), Vec4(2, 2, 2), Vec4(3, 3, 3));
     Mat4 trans = Mat4::translate(-1, -1, -1);
 
-    Mesh mesh = Mesh();
+    Mesh mesh;
     mesh.triangles.push_back(triangle);
 
     trans * mesh;

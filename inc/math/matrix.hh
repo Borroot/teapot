@@ -11,7 +11,7 @@ private:
     double matrix[4][4];
 
 public:
-    Mat4() {};
+    Mat4() = default;
     Mat4(const double[4][4]);
 
     double* operator[](int);

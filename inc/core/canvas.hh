@@ -9,7 +9,7 @@ public:
     int w;
     int h;
 
-    Canvas() {};
+    Canvas() = default;
     Canvas(int w, int h);
 
     void set(int x, int y, sf::Color);

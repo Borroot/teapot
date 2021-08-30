@@ -22,7 +22,7 @@ int main()
         rad += 1 * (currtime.asSeconds() - prevtime.asSeconds());
         prevtime = currtime;
 
-        World world_clone = World(world);
+        World world_clone(world);
 
         // Mat4 rot = Mat4::rotx(rad);
         // rot * world_clone.meshes[0];
