@@ -147,6 +147,24 @@ Vec4 &Vec4::operator-=(const Vec4 &v)
     return *this;
 }
 
+Vec4 Vec4::operator-()
+{
+    return Vec4(-this->x, -this->y, -this->z, this->w);
+}
+
+Vec4 Vec4::operator*(const double scalar)
+{
+    return Vec4(this->x * scalar, this->y * scalar, this->z * scalar, this->w);
+}
+
+Vec4 &Vec4::operator*=(const double scalar)
+{
+    this->x *= scalar;
+    this->y *= scalar;
+    this->z *= scalar;
+    return *this;
+}
+
 Vec4::operator Vec3()
 {
     if (this->w == 0)

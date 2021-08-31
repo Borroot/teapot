@@ -32,6 +32,11 @@ public:
     Vec4 &operator+=(const Vec4 &);
     Vec4 &operator-=(const Vec4 &);
 
+    Vec4 operator-();
+
+    Vec4 operator*(const double);
+    Vec4 &operator*=(const double);
+
     operator Vec3();
 
     friend std::ostream &operator<<(std::ostream &, const Vec4 &);

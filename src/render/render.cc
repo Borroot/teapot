@@ -45,16 +45,17 @@ void Render::list(const World &world, std::vector<Triangle> &triangles)
 void Render::sort(std::vector<Triangle> &triangles)
 {
     std::sort(triangles.begin(), triangles.end(), [](Triangle t1, Triangle t2) {
-        double average1 = (t1.v0.z + t1.v1.z + t1.v2.z) / 3;
+        double average1 = (t1.v0.z + t1.v1.z + t1.v2.z) / 3;  // TODO use distance to camera, not just z
         double average2 = (t2.v0.z + t2.v1.z + t2.v2.z) / 3;
         return average1 > average2;
     });  // painter's algorithm
 }
 
-void Render::render(World &world, Canvas &canvas)
+void Render::render(const World &world, Canvas &canvas)
 {
-    Vec3 light = Vec3(0, 1, -1).normalize();
-    Mat4 viewport = world.camera.viewport();
+    Vec3 light = Vec3(-1, 1, -1).normalize();
+    Camera camera = world.camera;
+    Mat4 viewport = camera.viewport();
 
     std::vector<Triangle> triangles;
     list(world, triangles);
@@ -62,9 +63,7 @@ void Render::render(World &world, Canvas &canvas)
 
     for (Triangle triangle : triangles)
     {
-        Mat4::translate(0, 0, 2) * triangle;  // TODO remove me
-
-        if ((triangle.v0 - world.camera.pos) * triangle.normal() < 0)  // backface culling
+        if ((triangle.v0 - camera.pos) * triangle.normal() < 0)  // backface culling
         {
             double shade = light * triangle.normal();
             sf::Color color = sf::Color(shade * 255, shade * 255, shade * 255, 255);

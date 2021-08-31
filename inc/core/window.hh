@@ -8,9 +8,7 @@
 class Window
 {
 private:
-    sf::RenderWindow window;
     Canvas canvas;
-
     Render render;
 
     sf::Texture texture;
@@ -21,6 +19,11 @@ private:
     sf::Text fps(double dt);
 
 public:
+    sf::RenderWindow window;
+
+    int w;
+    int h;
+
     Window() = default;
     Window(int w, int h, double scale);
 
@@ -29,6 +32,6 @@ public:
 
     bool poll(sf::Event &);
 
-    void draw(World &, double dt);
+    void draw(const World &, double dt);
     void set(int x, int y, sf::Color c);
 };

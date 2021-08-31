@@ -195,6 +195,34 @@ Test(vector, subtraction)
     cr_assert_throw(v7 - v6, std::domain_error);
 }
 
+Test(vector, negation)
+{
+    Vec3 v1(-1, 2, -3);
+    cr_assert_eq(-v1, Vec3(1, -2, 3));
+    cr_assert_eq(v1, Vec3(-1, 2, -3));
+
+    Vec4 v2(-1, 2, -3);
+    cr_assert_eq(-v2, Vec4(1, -2, 3));
+    cr_assert_eq(v2, Vec4(-1, 2, -3));
+}
+
+Test(vector, scalar)
+{
+    Vec3 v1(2, 3, 4);
+    cr_assert_eq(v1 * 2, Vec3(4, 6, 8));
+    cr_assert_eq(v1, Vec3(2, 3, 4));
+
+    v1 *= 2;
+    cr_assert_eq(v1, Vec3(4, 6, 8));
+
+    Vec4 v2(2, 3, 4, 2);
+    cr_assert_eq(v2 * 2, Vec4(4, 6, 8, 2));
+    cr_assert_eq(v2, Vec4(2, 3, 4, 2));
+
+    v2 *= 2;
+    cr_assert_eq(v2, Vec4(4, 6, 8, 2));
+}
+
 Test(vector, casting)
 {
     Vec3 v1(2, 3, 4);

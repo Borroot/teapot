@@ -18,13 +18,13 @@ Camera::Camera(const Camera &camera)
 Mat4 Camera::viewport()
 {
     this->forward.normalize();
-    this->up.normalize();  // TODO forward can add pitch to up
+    this->up = (this->up - (this->forward * (this->up * this->forward))).normalize();
     Vec3 right = this->up ^ this->forward;
 
     return Mat4(new double[4][4]{
-        {right.x, this->up.x, this->forward.x, -(this->pos * right)},
-        {right.y, this->up.y, this->forward.y, -(this->pos * this->up)},
-        {right.z, this->up.z, this->forward.z, -(this->pos * this->forward)},
+        {right.x, right.y, right.z, -this->pos * right},
+        {this->up.x, this->up.y, this->up.z, -this->pos * this->up},
+        {this->forward.x, this->forward.y, this->forward.z, -this->pos * this->forward},
         {0, 0, 0, 1}});
 }
 

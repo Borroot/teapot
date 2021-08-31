@@ -8,6 +8,9 @@
 
 Window::Window(int w, int h, double scale)
 {
+    this->w = w;
+    this->h = h;
+
     this->window.create(sf::VideoMode(w, h), "Teapot");
     this->window.setFramerateLimit(500);
 
@@ -18,7 +21,6 @@ Window::Window(int w, int h, double scale)
     this->canvas.fill(sf::Color::Black);
 
     this->render = Render(width, height);
-
     this->sprite.setScale(scale, scale);
 
     if (!this->texture.create(width, height))
@@ -26,6 +28,11 @@ Window::Window(int w, int h, double scale)
 
     if (!this->font.loadFromFile("res/fonts/SansMono-Regular.ttf"))
         throw std::runtime_error("Could not load font.");
+
+    sf::Mouse::setPosition(sf::Vector2i(w / 2, h / 2), this->window);
+    this->window.setMouseCursorGrabbed(true);
+    this->window.setMouseCursorVisible(false);
+
 }
 
 bool Window::isopen()
@@ -50,7 +57,7 @@ sf::Text Window::fps(double dt)
     return text;
 }
 
-void Window::draw(World &world, double dt)
+void Window::draw(const World &world, double dt)
 {
     this->canvas.fill(sf::Color::Black);
     this->render.render(world, canvas);

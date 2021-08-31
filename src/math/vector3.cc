@@ -87,6 +87,24 @@ Vec3 &Vec3::operator-=(const Vec3 &v)
     return *this;
 }
 
+Vec3 Vec3::operator-()
+{
+    return Vec3(-this->x, -this->y, -this->z);
+}
+
+Vec3 Vec3::operator*(const double scalar)
+{
+    return Vec3(this->x * scalar, this->y * scalar, this->z * scalar);
+}
+
+Vec3 &Vec3::operator*=(const double scalar)
+{
+    this->x *= scalar;
+    this->y *= scalar;
+    this->z *= scalar;
+    return *this;
+}
+
 Vec3::operator Vec4()
 {
     return Vec4(this->x, this->y, this->z, 1);

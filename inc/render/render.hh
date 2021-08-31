@@ -22,5 +22,5 @@ public:
     Render() = default;
     Render(int w, int h);
 
-    void render(World &, Canvas &);
+    void render(const World &, Canvas &);
 };
