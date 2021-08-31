@@ -107,25 +107,6 @@ Mat4 Mat4::scale(double x, double y, double z)
         {0, 0, 0, 1}});
 }
 
-Mat4 Mat4::viewport(int w, int h)
-{
-    return scale(w, h, 1) * translate(0.5, 0.5, 0);
-}
-
-Mat4 Mat4::projection(int w, int h, double fov, double far, double near)
-{
-    double fovrad = 1 / tan(fov * 0.5 / 180.0 * M_PI);
-    double aspect_ratio = (double)h / (double)w;
-
-    double projection[4][4] = {
-        {aspect_ratio * fovrad, 0, 0, 0},
-        {0, fovrad, 0, 0},
-        {0, 0, far / (far - near), (-far * near) / (far - near)},
-        {0, 0, 1, 0}};
-
-    return Mat4(projection);
-}
-
 Mat4 Mat4::rotx(double rad)
 {
     double c = cos(rad);
