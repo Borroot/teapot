@@ -18,10 +18,7 @@ private:
 
     sf::Font font;
 
-    sf::Clock clock;
-    sf::Time prevdraw;
-
-    sf::Text fps();
+    sf::Text fps(double dt);
 
 public:
     Window() = default;
@@ -32,6 +29,6 @@ public:
 
     bool poll(sf::Event &);
 
-    void draw(World &);
+    void draw(World &, double dt);
     void set(int x, int y, sf::Color c);
 };

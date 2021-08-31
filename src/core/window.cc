@@ -43,18 +43,14 @@ bool Window::poll(sf::Event &event)
     return this->window.pollEvent(event);
 }
 
-sf::Text Window::fps()
+sf::Text Window::fps(double dt)
 {
-    sf::Time currtime = clock.getElapsedTime();
-    int fps = 1.f / (currtime.asSeconds() - this->prevdraw.asSeconds());
-    this->prevdraw = currtime;
-
-    sf::Text text("fps: " + std::to_string(fps), this->font, 15);
+    sf::Text text("fps: " + std::to_string((int)(1 / dt)), this->font, 15);
     text.setFillColor(sf::Color::White);
     return text;
 }
 
-void Window::draw(World &world)
+void Window::draw(World &world, double dt)
 {
     this->canvas.fill(sf::Color::Black);
     this->render.render(world, canvas);
@@ -65,7 +61,7 @@ void Window::draw(World &world)
     this->window.clear();
 
     this->window.draw(this->sprite);
-    this->window.draw(this->fps());
+    this->window.draw(this->fps(dt));
 
     this->window.display();
 }

@@ -16,21 +16,23 @@ int main()
     Window window(1200, 800, 2);
 
     sf::Clock clock;
-    sf::Time prevtime = clock.getElapsedTime();
+    sf::Time lasttick = clock.getElapsedTime();
+
     double rad = 0;
 
     while (window.isopen())
     {
-        sf::Time currtime = clock.getElapsedTime();
-        rad += 1 * (currtime.asSeconds() - prevtime.asSeconds());
-        prevtime = currtime;
+        sf::Time thistick = clock.getElapsedTime();
+        double dt = thistick.asSeconds() - lasttick.asSeconds();
+        lasttick = thistick;
 
         World world_clone(world);
 
-        // Mat4 rot = Mat4::rotz(rad);
-        // Mat4::rotx(rad) * rot * world_clone.meshes[0];
+        rad += 1 * dt;
+        Mat4 rot = Mat4::rotz(rad);
+        rot * world_clone.meshes[0];
 
-        window.draw(world_clone);
+        window.draw(world_clone, dt);
 
         sf::Event event;
         while (window.poll(event))
