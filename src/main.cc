@@ -13,7 +13,7 @@ int main()
     Camera camera(Vec3(0, 0, 0), Vec3(0, 0, 1), Vec3(0, 1, 0));
     World world(meshes, camera);
 
-    Window window(1200, 900, 3);
+    Window window(1200, 800, 2);
 
     sf::Clock clock;
     sf::Time prevtime = clock.getElapsedTime();
@@ -27,8 +27,8 @@ int main()
 
         World world_clone(world);
 
-        // Mat4 rot = Mat4::rotx(rad);
-        // rot * world_clone.meshes[0];
+        // Mat4 rot = Mat4::rotz(rad);
+        // Mat4::rotx(rad) * rot * world_clone.meshes[0];
 
         window.draw(world_clone);
 

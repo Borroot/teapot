@@ -74,7 +74,7 @@ void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
 
 Vec3 Triangle::normal()
 {
-    return (this->v1 - this->v0).normalize() ^ (this->v2 - this->v0).normalize();
+    return ((this->v1 - this->v0).normalize() ^ (this->v2 - this->v0).normalize()).normalize();
 }
 
 std::ostream &operator<<(std::ostream &os, const Triangle &t)

@@ -22,10 +22,10 @@ Mat4 Camera::viewport()
     Vec3 right = this->up ^ this->forward;
 
     return Mat4(new double[4][4]{
-        {right.x, this->up.x, this->forward.x, 0},
-        {right.y, this->up.y, this->forward.y, 0},
-        {right.z, this->up.z, this->forward.z, 0},
-        {-(this->pos * right), -(this->pos * this->up), -(this->pos * this->forward), 1}});
+        {right.x, this->up.x, this->forward.x, -(this->pos * right)},
+        {right.y, this->up.y, this->forward.y, -(this->pos * this->up)},
+        {right.z, this->up.z, this->forward.z, -(this->pos * this->forward)},
+        {0, 0, 0, 1}});
 }
 
 Camera &Camera::operator=(const Camera &camera)

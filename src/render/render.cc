@@ -32,7 +32,7 @@ Mat4 Render::projection_matrix(int w, int h, double fov, double far, double near
 
 Mat4 Render::screen_matrix(int w, int h)
 {
-    return Mat4::scale(w, h, 1) * Mat4::translate(0.5, 0.5, 0);
+    return Mat4::scale(w / 2, h / 2, 1) * Mat4::translate(1, 1, 0);
 }
 
 void Render::list(const World &world, std::vector<Triangle> &triangles)
@@ -53,10 +53,8 @@ void Render::sort(std::vector<Triangle> &triangles)
 
 void Render::render(World &world, Canvas &canvas)
 {
-    Vec3 light = Vec3(0, 0, -1).normalize();
+    Vec3 light = Vec3(0, 1, -1).normalize();
     Mat4 viewport = world.camera.viewport();
-
-    Mat4 transz = Mat4::translate(0, 0, 3);  // TODO remove me
 
     std::vector<Triangle> triangles;
     list(world, triangles);
@@ -64,14 +62,14 @@ void Render::render(World &world, Canvas &canvas)
 
     for (Triangle triangle : triangles)
     {
-        transz * triangle;  // TODO remove me
+        Mat4::translate(0, 0, 2) * triangle;  // TODO remove me
 
         if ((triangle.v0 - world.camera.pos) * triangle.normal() < 0)  // backface culling
         {
-            double shade = light * triangle.normal();  // shading
+            double shade = light * triangle.normal();
             sf::Color color = sf::Color(shade * 255, shade * 255, shade * 255, 255);
 
-            this->screen * this->projection * viewport * triangle;  // projection
+            this->screen * this->projection * viewport * triangle;
             triangle.draw(canvas, color, true, false);
         }
     }
