@@ -49,7 +49,7 @@ void Render::render(const World &world, Canvas &canvas)
 {
     Vec3 light = Vec3(-1, 1, -1).normalize();
     Camera camera = world.camera;
-    Mat4 viewport = camera.viewport();
+    Mat4 view = camera.view_matrix();
 
     std::vector<Triangle> triangles;
     list(world, triangles);
@@ -62,7 +62,7 @@ void Render::render(const World &world, Canvas &canvas)
             double shade = light * triangle.normal();
             sf::Color color = sf::Color(shade * 255, shade * 255, shade * 255, 255);
 
-            this->screen * this->projection * viewport * triangle;
+            this->screen * this->projection * view * triangle;
             triangle.draw(canvas, color, true, false);
         }
     }

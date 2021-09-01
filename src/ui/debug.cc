@@ -5,7 +5,7 @@ static std::string pos(const World &world)
     std::string x = std::to_string(world.camera.pos.x);
     std::string y = std::to_string(world.camera.pos.y);
     std::string z = std::to_string(world.camera.pos.z);
-    return "xyz: " + x + " / " + y + " / " + z + "\n";
+    return "xyz: " + x + " " + y + " " + z + "\n";
 }
 
 static std::string fps(double dt)

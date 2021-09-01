@@ -13,7 +13,7 @@ int main()
 
     Mesh axis("res/objects/axis.obj");
     std::vector<Mesh> meshes = {axis};
-    Camera camera(Vec3(0, 0, -2), Vec3(0, 0, 1), Vec3(0, 1, 0));
+    Camera camera(Vec3(0, 0, -2));
     World world(meshes, camera);
 
     sf::Clock clock;
