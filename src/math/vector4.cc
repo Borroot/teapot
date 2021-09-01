@@ -1,7 +1,8 @@
-#include <iostream>
+#include <ostream>
 #include <math.h>
 #include <stdexcept>
-#include "math/vector.hh"
+#include "math/vector3.hh"
+#include "math/vector4.hh"
 
 Vec4::Vec4(double x, double y, double z, double w)
 {

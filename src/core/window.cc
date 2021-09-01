@@ -1,10 +1,7 @@
-#include <SFML/Graphics.hpp>
 #include <stdexcept>
 #include <string>
-#include <cstring>
-#include "core/canvas.hh"
 #include "core/window.hh"
-#include "render/render.hh"
+#include "ui/debug.hh"
 
 Window::Window(int w, int h, double scale)
 {
@@ -50,9 +47,9 @@ bool Window::poll(sf::Event &event)
     return this->window.pollEvent(event);
 }
 
-sf::Text Window::fps(double dt)
+sf::Text Window::text(std::string str)
 {
-    sf::Text text("fps: " + std::to_string((int)(1 / dt)), this->font, 15);
+    sf::Text text(str, this->font, 15);
     text.setFillColor(sf::Color::White);
     return text;
 }
@@ -68,7 +65,7 @@ void Window::draw(const World &world, double dt)
     this->window.clear();
 
     this->window.draw(this->sprite);
-    this->window.draw(this->fps(dt));
+    this->window.draw(this->text(debug(world, dt)));
 
     this->window.display();
 }

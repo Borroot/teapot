@@ -12,5 +12,4 @@ public:
 
     Mesh() = default;
     Mesh(const std::string &);
-    Mesh(const Mesh &);
 };

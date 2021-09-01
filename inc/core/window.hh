@@ -16,7 +16,8 @@ private:
 
     sf::Font font;
 
-    sf::Text fps(double dt);
+    std::string fps(double dt);
+    sf::Text text(std::string);
 
 public:
     sf::RenderWindow window;

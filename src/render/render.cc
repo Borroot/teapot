@@ -1,12 +1,6 @@
-#include <SFML/Graphics.hpp>
 #include <algorithm>
 #include <math.h>
-#include <iostream>
-#include <vector>
-#include "core/canvas.hh"
-#include "math/common.hh"
-#include "math/matrix.hh"
-#include "math/vector.hh"
+#include "math/vector3.hh"
 #include "render/line.hh"
 #include "render/render.hh"
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <tuple>
 #include <vector>
 #include "world/camera.hh"
 #include "world/mesh.hh"
@@ -13,5 +12,4 @@ public:
 
     World() = default;
     World(std::vector<Mesh> &, Camera &);
-    World(const World &);
 };

@@ -2,7 +2,7 @@
 #include <vector>
 #include "core/input.hh"
 #include "core/window.hh"
-#include "math/vector.hh"
+#include "math/vector3.hh"
 #include "world/camera.hh"
 #include "world/mesh.hh"
 #include "world/world.hh"

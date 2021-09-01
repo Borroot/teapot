@@ -36,9 +36,3 @@ Mesh::Mesh(const std::string &filename)
     }
     file.close();
 }
-
-Mesh::Mesh(const Mesh &mesh)
-{
-    for (Triangle triangle : mesh.triangles)
-        this->triangles.push_back(Triangle(triangle));
-}

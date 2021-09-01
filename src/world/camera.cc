@@ -8,13 +8,6 @@ Camera::Camera(Vec3 pos, Vec3 forward, Vec3 up)
     this->up = up;
 }
 
-Camera::Camera(const Camera &camera)
-{
-    this->pos = Vec3(camera.pos);
-    this->forward = Vec3(camera.forward);
-    this->up = Vec3(camera.up);
-}
-
 Mat4 Camera::viewport()
 {
     this->forward.normalize();
@@ -26,12 +19,4 @@ Mat4 Camera::viewport()
         {this->up.x, this->up.y, this->up.z, -this->pos * this->up},
         {this->forward.x, this->forward.y, this->forward.z, -this->pos * this->forward},
         {0, 0, 0, 1}});
-}
-
-Camera &Camera::operator=(const Camera &camera)
-{
-    this->pos = Vec3(camera.pos);
-    this->forward = Vec3(camera.forward);
-    this->up = Vec3(camera.up);
-    return *this;
 }

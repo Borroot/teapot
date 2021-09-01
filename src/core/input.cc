@@ -57,7 +57,10 @@ static void turn(Window &window, World &world, double dt)
         Mat4 yaw = Mat4::roty(pos.x * dt);
 
         // TODO put a limit on the total pitch
-        // TODO fix swapped pitch at negative z side
+
+        // pitch a fixed forward vector (0, 0, 1)
+        // then perform the yaw
+        // so save the pitch and yaw in the camera
 
         world.camera.forward = pitch * yaw * world.camera.forward;
         sf::Mouse::setPosition(sf::Vector2i(window.w / 2, window.h / 2), window.window);

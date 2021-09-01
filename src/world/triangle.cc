@@ -2,7 +2,7 @@
 #include <assert.h>
 #include "core/canvas.hh"
 #include "math/common.hh"
-#include "math/vector.hh"
+#include "math/vector4.hh"
 #include "render/line.hh"
 #include "world/triangle.hh"
 
@@ -11,13 +11,6 @@ Triangle::Triangle(const Vec4 v0, const Vec4 v1, const Vec4 v2)
     this->v0 = v0;
     this->v1 = v1;
     this->v2 = v2;
-}
-
-Triangle::Triangle(const Triangle &triangle)
-{
-    this->v0 = triangle.v0;
-    this->v1 = triangle.v1;
-    this->v2 = triangle.v2;
 }
 
 bool Triangle::edgetest(int x, int y, const Vec4 &a, const Vec4 &b)
@@ -44,9 +37,9 @@ void Triangle::rasterize(Canvas &canvas, sf::Color c)
 {
     assert(this->v0.w == 1 && this->v1.w == 1 && this->v2.w == 1);
 
-    assert(0 <= this->v0.x && this->v0.x <= canvas.w && 0 <= this->v0.y && this->v0.y <= canvas.h);
-    assert(0 <= this->v1.x && this->v1.x <= canvas.w && 0 <= this->v1.y && this->v1.y <= canvas.h);
-    assert(0 <= this->v2.x && this->v2.x <= canvas.w && 0 <= this->v2.y && this->v2.y <= canvas.h);
+    assert(0 <= this->v0.x && this->v0.x < canvas.w && 0 <= this->v0.y && this->v0.y < canvas.h);
+    assert(0 <= this->v1.x && this->v1.x < canvas.w && 0 <= this->v1.y && this->v1.y < canvas.h);
+    assert(0 <= this->v2.x && this->v2.x < canvas.w && 0 <= this->v2.y && this->v2.y < canvas.h);
 
     int xmin = min(3, this->v0.x, this->v1.x, this->v2.x);
     int xmax = max(3, this->v0.x, this->v1.x, this->v2.x);
@@ -62,6 +55,15 @@ void Triangle::rasterize(Canvas &canvas, sf::Color c)
 void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
 {
     this->normalize_w();
+
+    if (!(this->v0.x >= 0 && this->v0.x < canvas.w  // TODO remove me
+       && this->v0.y >= 0 && this->v0.y < canvas.h
+       && this->v1.x >= 0 && this->v1.x < canvas.w
+       && this->v1.y >= 0 && this->v1.y < canvas.h
+       && this->v2.x >= 0 && this->v2.x < canvas.w
+       && this->v2.y >= 0 && this->v2.y < canvas.h))
+        return;
+
     if (fill)
         this->rasterize(canvas, c);
     if (lines)

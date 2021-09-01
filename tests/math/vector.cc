@@ -1,7 +1,8 @@
 #include <criterion/criterion.h>
 #include <math.h>
 #include <stdexcept>
-#include "math/vector.hh"
+#include "math/vector3.hh"
+#include "math/vector4.hh"
 
 Test(vector, Vec4_declaration)
 {

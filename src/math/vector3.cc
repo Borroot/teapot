@@ -1,6 +1,7 @@
-#include <iostream>
+#include <ostream>
 #include <math.h>
-#include "math/vector.hh"
+#include "math/vector3.hh"
+#include "math/vector4.hh"
 
 Vec3::Vec3(double x, double y, double z)
 {

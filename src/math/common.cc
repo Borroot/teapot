@@ -34,7 +34,3 @@ double max(unsigned int count, ...)
     va_end(list);
     return max;
 }
-
-int abs(int n) {
-    return n >= 0 ? n : -n;
-}
