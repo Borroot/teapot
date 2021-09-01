@@ -42,7 +42,7 @@ static void move(Window &window, World &world, double dt)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
         move += Vec3(0, -1, 0);
 
-    world.camera.pos += move * 2 * dt;
+    world.camera.pos += move * dt;
 }
 
 static void turn(Window &window, World &world, double dt)
@@ -57,6 +57,7 @@ static void turn(Window &window, World &world, double dt)
         Mat4 yaw = Mat4::roty(pos.x * dt);
 
         // TODO put a limit on the total pitch
+        // TODO fix swapped pitch at negative z side
 
         world.camera.forward = pitch * yaw * world.camera.forward;
         sf::Mouse::setPosition(sf::Vector2i(window.w / 2, window.h / 2), window.window);

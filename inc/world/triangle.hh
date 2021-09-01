@@ -11,7 +11,7 @@ private:
     bool edgetest(int, int, const Vec4 &, const Vec4 &);
     bool inside(int, int);
 
-    void remove_w();
+    void normalize_w();
 
 public:
     Vec4 v0;

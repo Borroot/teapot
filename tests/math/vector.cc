@@ -21,12 +21,12 @@ Test(vector, length)
     cr_assert_float_eq(v3.length(), sqrt(14), 0.1);
 }
 
-Test(vector, Vec4_remove_w)
+Test(vector, Vec4_normalize_w)
 {
     Vec4 v(2, 4, 6, 2);
-    v.remove_w();
+    v.normalize_w();
     cr_assert_eq(v, Vec4(1, 2, 3, 1));
-    cr_assert_throw(Vec4(1, 1, 1, 0).remove_w(), std::domain_error);
+    cr_assert_throw(Vec4(1, 1, 1, 0).normalize_w(), std::domain_error);
 }
 
 Test(vector, normalize)

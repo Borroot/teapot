@@ -21,7 +21,7 @@ Vec4::Vec4(double x, double y, double z)
     this->w = 1;
 }
 
-void Vec4::remove_w()
+void Vec4::normalize_w()
 {
     if (w == 0)
         throw std::domain_error("divide by zero since w=0");
@@ -33,7 +33,7 @@ void Vec4::remove_w()
 
 Vec4 &Vec4::normalize()
 {
-    this->remove_w();
+    this->normalize_w();
     double length = this->length();
     if (length != 0)
     {
@@ -67,8 +67,8 @@ double Vec4::operator*(const Vec4 &v)
 Vec4 Vec4::operator^(const Vec4 &vector)
 {
     Vec4 v = Vec4(vector);
-    v.remove_w();
-    this->remove_w();
+    v.normalize_w();
+    this->normalize_w();
 
     return Vec4(
         this->y * v.z - this->z * v.y,
@@ -79,8 +79,8 @@ Vec4 Vec4::operator^(const Vec4 &vector)
 Vec4 &Vec4::operator^=(const Vec4 &vector)
 {
     Vec4 v = Vec4(vector);
-    v.remove_w();
-    this->remove_w();
+    v.normalize_w();
+    this->normalize_w();
 
     double x = this->y * v.z - this->z * v.y;
     double y = this->z * v.x - this->x * v.z;

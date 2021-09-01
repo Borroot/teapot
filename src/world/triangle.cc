@@ -33,11 +33,11 @@ bool Triangle::inside(int x, int y)
         && edgetest(x, y, this->v2, this->v0);
 }
 
-void Triangle::remove_w()
+void Triangle::normalize_w()
 {
-    this->v0.remove_w();
-    this->v1.remove_w();
-    this->v2.remove_w();
+    this->v0.normalize_w();
+    this->v1.normalize_w();
+    this->v2.normalize_w();
 }
 
 void Triangle::rasterize(Canvas &canvas, sf::Color c)
@@ -61,14 +61,14 @@ void Triangle::rasterize(Canvas &canvas, sf::Color c)
 
 void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
 {
-    this->remove_w();
+    this->normalize_w();
     if (fill)
         this->rasterize(canvas, c);
     if (lines)
     {
-        draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Magenta, 2);
-        draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Magenta, 2);
-        draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Magenta, 2);
+        draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Red, 1);
+        draw_line(canvas, this->v1.x, this->v1.y, this->v2.x, this->v2.y, sf::Color::Red, 1);
+        draw_line(canvas, this->v2.x, this->v2.y, this->v0.x, this->v0.y, sf::Color::Red, 1);
     }
 }
 

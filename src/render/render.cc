@@ -69,7 +69,7 @@ void Render::render(const World &world, Canvas &canvas)
             sf::Color color = sf::Color(shade * 255, shade * 255, shade * 255, 255);
 
             this->screen * this->projection * viewport * triangle;
-            triangle.draw(canvas, color, true, false);
+            triangle.draw(canvas, color, true, true);
         }
     }
 }
