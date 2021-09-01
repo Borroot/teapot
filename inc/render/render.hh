@@ -16,7 +16,7 @@ private:
     static Mat4 screen_matrix(int w, int h);
 
     static void list(const World &, std::vector<Triangle> &);
-    static void sort(std::vector<Triangle> &);
+    static void sort(std::vector<Triangle> &, const Vec3 &ref);
 
 public:
     Render() = default;

@@ -36,5 +36,7 @@ public:
 
     operator Vec4();
 
+    static double dist_fast(const Vec3 &, const Vec3 &);
+
     friend std::ostream &operator<<(std::ostream &, const Vec3 &);
 };

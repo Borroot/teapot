@@ -42,11 +42,11 @@ void Render::list(const World &world, std::vector<Triangle> &triangles)
             triangles.push_back(triangle);
 }
 
-void Render::sort(std::vector<Triangle> &triangles)
+void Render::sort(std::vector<Triangle> &triangles, const Vec3 &ref)
 {
-    std::sort(triangles.begin(), triangles.end(), [](Triangle t1, Triangle t2) {
-        double average1 = (t1.v0.z + t1.v1.z + t1.v2.z) / 3;  // TODO use distance to camera, not just z
-        double average2 = (t2.v0.z + t2.v1.z + t2.v2.z) / 3;
+    std::sort(triangles.begin(), triangles.end(), [&](Triangle t1, Triangle t2) {
+        double average1 = (Vec3::dist_fast(t1.v0, ref) + Vec3::dist_fast(t1.v1, ref) + Vec3::dist_fast(t1.v2, ref)) / 3;
+        double average2 = (Vec3::dist_fast(t2.v0, ref) + Vec3::dist_fast(t2.v1, ref) + Vec3::dist_fast(t2.v2, ref)) / 3;
         return average1 > average2;
     });  // painter's algorithm
 }
@@ -59,7 +59,7 @@ void Render::render(const World &world, Canvas &canvas)
 
     std::vector<Triangle> triangles;
     list(world, triangles);
-    sort(triangles);
+    sort(triangles, camera.pos);
 
     for (Triangle triangle : triangles)
     {
@@ -69,7 +69,7 @@ void Render::render(const World &world, Canvas &canvas)
             sf::Color color = sf::Color(shade * 255, shade * 255, shade * 255, 255);
 
             this->screen * this->projection * viewport * triangle;
-            triangle.draw(canvas, color, true, true);
+            triangle.draw(canvas, color, true, false);
         }
     }
 }

@@ -110,6 +110,12 @@ Vec3::operator Vec4()
     return Vec4(this->x, this->y, this->z, 1);
 }
 
+double Vec3::dist_fast(const Vec3 &v1, const Vec3 &v2)
+{
+    // perfrom no square root operation, hence fast but inaccurate
+    return pow(v1.x - v2.x, 2) + pow(v1.y - v2.y, 2) + pow(v1.z - v2.z, 2);
+}
+
 std::ostream &operator<<(std::ostream &os, const Vec3 &v)
 {
     os << v.x << " " << v.y << " " << v.z << std::endl;
