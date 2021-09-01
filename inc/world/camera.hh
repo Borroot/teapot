@@ -6,11 +6,11 @@
 class Camera
 {
 private:
-    double pitch = 0;  // current pitch in radians
-    double yaw = 0;    // current yaw in radians
+    double pitch = 0;  // in radians
+    double yaw = 0;    // in radians
 
 public:
-    Vec3 pos;  // location of the camera in world space
+    Vec3 pos;  // location in world space
 
     Camera() = default;
     Camera(Vec3 pos);

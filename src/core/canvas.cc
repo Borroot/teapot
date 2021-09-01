@@ -9,7 +9,7 @@ Canvas::Canvas(int w, int h)
 
 void Canvas::set(int x, int y, sf::Color c)
 {
-    int index = this->w * (this->h - y) * 4 + x * 4;
+    int index = this->w * (this->h - 1 - y) * 4 + x * 4;
     this->pixels[index + 0] = c.r;
     this->pixels[index + 1] = c.g;
     this->pixels[index + 2] = c.b;

@@ -1,5 +1,5 @@
 #include <tuple>
-#include "core/input.hh"
+#include "core/update.hh"
 #include "core/window.hh"
 
 static void check(Window &window)
@@ -19,7 +19,7 @@ static void check(Window &window)
         }
 }
 
-static void move(Window &window, World &world, double dt)
+static void move(World &world, double dt)
 {
     Vec3 move(0, 0, 0);
 
@@ -62,6 +62,6 @@ static void turn(Window &window, World &world, double dt)
 void update(Window &window, World &world, double dt)
 {
     check(window);
-    move(window, world, dt);
+    move(world, dt);
     turn(window, world, dt);
 }

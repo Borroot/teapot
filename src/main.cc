@@ -1,6 +1,6 @@
 #include <SFML/Window.hpp>
 #include <vector>
-#include "core/input.hh"
+#include "core/update.hh"
 #include "core/window.hh"
 #include "math/vector3.hh"
 #include "world/camera.hh"
