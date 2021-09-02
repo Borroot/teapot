@@ -15,8 +15,6 @@ private:
     sf::Sprite sprite;
 
     sf::Font font;
-
-    std::string fps(double dt);
     sf::Text text(std::string);
 
 public:

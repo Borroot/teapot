@@ -33,7 +33,7 @@ void Triangle::normalize_w()
     this->v2.normalize_w();
 }
 
-void Triangle::rasterize(Canvas &canvas, sf::Color c)
+void Triangle::rasterize(Canvas &canvas)
 {
     assert(this->v0.w == 1 && this->v1.w == 1 && this->v2.w == 1);
 
@@ -49,10 +49,10 @@ void Triangle::rasterize(Canvas &canvas, sf::Color c)
     for (int x = xmin; x <= xmax; x++)
         for (int y = ymin; y <= ymax; y++)
             if (this->inside(x, y))
-                canvas.set(x, y, c);
+                canvas.set(x, y, this->color);
 }
 
-void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
+void Triangle::draw(Canvas &canvas, bool fill, bool lines)
 {
     this->normalize_w();
 
@@ -65,7 +65,7 @@ void Triangle::draw(Canvas &canvas, sf::Color c, bool fill, bool lines)
         return;
 
     if (fill)
-        this->rasterize(canvas, c);
+        this->rasterize(canvas);
     if (lines)
     {
         draw_line(canvas, this->v0.x, this->v0.y, this->v1.x, this->v1.y, sf::Color::Red, 1);

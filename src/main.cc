@@ -12,7 +12,9 @@ int main()
     Window window(1200, 800, 2);
 
     Mesh axis("res/objects/axis.obj");
-    std::vector<Mesh> meshes = {axis};
+    Mesh teapot("res/objects/teapot.obj");
+    Mat4::translate(1, 1, 2) * teapot;
+    std::vector<Mesh> meshes = {axis, teapot};
     Camera camera(Vec3(0, 0, -2));
     World world(meshes, camera);
 

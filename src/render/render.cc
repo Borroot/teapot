@@ -1,16 +1,13 @@
 #include <algorithm>
+#include <iostream>
+#include <list>
 #include <math.h>
 #include "math/vector3.hh"
 #include "render/line.hh"
+#include "render/process.hh"
 #include "render/render.hh"
 
-Render::Render(int w, int h)
-{
-    this->projection = projection_matrix(w, h, 90, 1000, 0.1);
-    this->screen = screen_matrix(w, h);
-}
-
-Mat4 Render::projection_matrix(int w, int h, double fov, double far, double near)
+static Mat4 projection_matrix(int w, int h, double fov, double far, double near)
 {
     double fovrad = 1 / tan(fov * 0.5 / 180.0 * M_PI);
     double aspect_ratio = (double)h / (double)w;
@@ -24,46 +21,32 @@ Mat4 Render::projection_matrix(int w, int h, double fov, double far, double near
     return Mat4(projection);
 }
 
-Mat4 Render::screen_matrix(int w, int h)
+static Mat4 screen_matrix(int w, int h)
 {
     return Mat4::scale(w / 2, h / 2, 1) * Mat4::translate(1, 1, 0);
 }
 
-void Render::list(const World &world, std::vector<Triangle> &triangles)
+Render::Render(int w, int h)
 {
-    for (Mesh mesh : world.meshes)
-        for (Triangle triangle : mesh.triangles)
-            triangles.push_back(triangle);
-}
-
-void Render::sort(std::vector<Triangle> &triangles, const Vec3 &ref)
-{
-    std::sort(triangles.begin(), triangles.end(), [&](Triangle t1, Triangle t2) {
-        double average1 = (Vec3::dist_fast(t1.v0, ref) + Vec3::dist_fast(t1.v1, ref) + Vec3::dist_fast(t1.v2, ref)) / 3;
-        double average2 = (Vec3::dist_fast(t2.v0, ref) + Vec3::dist_fast(t2.v1, ref) + Vec3::dist_fast(t2.v2, ref)) / 3;
-        return average1 > average2;
-    });  // painter's algorithm
+    this->projection = projection_matrix(w, h, 90, this->far, this->near);
+    this->screen = screen_matrix(w, h);
 }
 
 void Render::render(const World &world, Canvas &canvas)
 {
-    Vec3 light = Vec3(-1, 1, -1).normalize();
     Camera camera = world.camera;
-    Mat4 view = camera.view_matrix();
+    std::list<Triangle> triangles;
 
-    std::vector<Triangle> triangles;
-    list(world, triangles);
-    sort(triangles, camera.pos);
+    populate(world, triangles);
+    backface_culling(triangles, camera.pos);
+    shade(triangles);
+    painters_algorithm(triangles, camera.pos);
+    apply_matrix(triangles, camera.view_matrix());
+    clip_farnear(triangles, this->far, this->near);
+    apply_matrix(triangles, this->projection);
+    clip_properly(triangles);
+    apply_matrix(triangles, this->screen);
+    draw(triangles, canvas);
 
-    for (Triangle triangle : triangles)
-    {
-        if ((triangle.v0 - camera.pos) * triangle.normal() < 0)  // backface culling
-        {
-            double shade = light * triangle.normal();
-            sf::Color color = sf::Color(shade * 255, shade * 255, shade * 255, 255);
-
-            this->screen * this->projection * view * triangle;
-            triangle.draw(canvas, color, true, false);
-        }
-    }
+    // std::cout << triangles.size() << std::endl;
 }
