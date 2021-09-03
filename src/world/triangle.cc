@@ -56,13 +56,13 @@ void Triangle::draw(Canvas &canvas, bool fill, bool lines)
 {
     this->normalize_w();
 
-    if (!(this->v0.x >= 0 && this->v0.x < canvas.w  // TODO remove me
-       && this->v0.y >= 0 && this->v0.y < canvas.h
-       && this->v1.x >= 0 && this->v1.x < canvas.w
-       && this->v1.y >= 0 && this->v1.y < canvas.h
-       && this->v2.x >= 0 && this->v2.x < canvas.w
-       && this->v2.y >= 0 && this->v2.y < canvas.h))
-        return;
+    // if (!(this->v0.x >= 0 && this->v0.x < canvas.w  // TODO remove me
+    //    && this->v0.y >= 0 && this->v0.y < canvas.h
+    //    && this->v1.x >= 0 && this->v1.x < canvas.w
+    //    && this->v1.y >= 0 && this->v1.y < canvas.h
+    //    && this->v2.x >= 0 && this->v2.x < canvas.w
+    //    && this->v2.y >= 0 && this->v2.y < canvas.h))
+    //     return;
 
     if (fill)
         this->rasterize(canvas);

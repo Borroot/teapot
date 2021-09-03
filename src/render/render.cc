@@ -3,8 +3,8 @@
 #include <list>
 #include <math.h>
 #include "math/vector3.hh"
+#include "render/clipping.hh"
 #include "render/line.hh"
-#include "render/process.hh"
 #include "render/render.hh"
 
 static Mat4 projection_matrix(int w, int h, double fov, double far, double near)
@@ -34,19 +34,29 @@ Render::Render(int w, int h)
 
 void Render::render(const World &world, Canvas &canvas)
 {
+    Vec3 light = Vec3(0.3, 0.5, -1).normalize();
     Camera camera = world.camera;
-    std::list<Triangle> triangles;
+    std::list<Triangle> ts;
 
-    populate(world, triangles);
-    backface_culling(triangles, camera.pos);
-    shade(triangles);
-    painters_algorithm(triangles, camera.pos);
-    apply_matrix(triangles, camera.view_matrix());
-    clip_farnear(triangles, this->far, this->near);
-    apply_matrix(triangles, this->projection);
-    clip_properly(triangles);
-    apply_matrix(triangles, this->screen);
-    draw(triangles, canvas);
+    for (Mesh m : world.meshes) for (Triangle t : m.triangles) ts.push_back(t);  // populate
+    ts.remove_if([&](Triangle &t) { return (t.v0 - camera.pos) * t.normal() >= 0; });  // backface culling
 
-    // std::cout << triangles.size() << std::endl;
+    for (Triangle &t : ts) {
+        double shade = light * t.normal() * 0xFF;
+        t.color = sf::Color(shade, shade, shade, 0xFF);
+    }  // apply shading
+
+    ts.sort([&](Triangle &t1, Triangle &t2) {
+        double av1 = (Vec3::dist_fast(t1.v0, camera.pos) + Vec3::dist_fast(t1.v1, camera.pos) + Vec3::dist_fast(t1.v2, camera.pos)) / 3;
+        double av2 = (Vec3::dist_fast(t2.v0, camera.pos) + Vec3::dist_fast(t2.v1, camera.pos) + Vec3::dist_fast(t2.v2, camera.pos)) / 3;
+        return av1 > av2; });  // painter's algorithm
+
+    for (Triangle &t : ts) camera.view_matrix() * t;  // view space
+    clip_farnear(ts, this->far, this->near);  // clip behind camera and far away
+
+    for (Triangle &t : ts) this->projection * t;  // projection space
+    for (Triangle &t : ts) this->screen * t;  // screen space
+
+    clip_properly(ts, canvas.w, canvas.h);  // clip on edges and create new triangles
+    for (Triangle &t : ts) t.draw(canvas, true, false);
 }

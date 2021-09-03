@@ -11,11 +11,9 @@ int main()
 {
     Window window(1200, 800, 2);
 
-    Mesh axis("res/objects/axis.obj");
-    Mesh teapot("res/objects/teapot.obj");
-    Mat4::translate(1, 1, 2) * teapot;
-    std::vector<Mesh> meshes = {axis, teapot};
-    Camera camera(Vec3(0, 0, -2));
+    Mesh cube("res/objects/cube.obj");
+    std::vector<Mesh> meshes = {cube};
+    Camera camera(Vec3(0, 0, -3));
     World world(meshes, camera);
 
     sf::Clock clock;
