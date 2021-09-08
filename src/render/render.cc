@@ -55,7 +55,7 @@ void Render::render(const World &world, Canvas &canvas)
     clip_farnear(ts, this->far, this->near);  // clip behind camera and far away
 
     for (Triangle &t : ts) this->projection * t;  // projection space
-    clip_properly(ts, canvas.w, canvas.h);  // clip on edges and create new triangles
+    clip_frustum(ts, canvas.w, canvas.h);  // clip on viewing frustum edges
 
     for (Triangle &t : ts) this->screen * t;  // screen space
     for (Triangle &t : ts) t.draw(canvas, true, false);

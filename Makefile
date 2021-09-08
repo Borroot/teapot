@@ -12,10 +12,10 @@ TST_SRC_FILES = $(shell find $(TST_DIR) -name *.cc)
 TST_OBJ_FILES = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(TST_SRC_FILES)) \
                 $(filter-out %/main.o, $(BIN_OBJ_FILES))
 
-EXTRAS = -g -Wno-unused-variable -Wno-unused-parameter #-O3
+EXTRAS = -g -Wno-unused-variable -Wno-unused-parameter -O3
 CFLAGS = $(EXTRAS) -std=c++11 -Wall -Wextra -Werror -pedantic
 IFLAGS = -I $(INC_DIR)
-LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system # -lsfml-audio
+LFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 TFLAGS = -lcriterion
 
 TARGETS = teapot test

@@ -93,7 +93,7 @@ static void clip_plane(Vec3 plane_point, Vec3 plane_normal, Triangle &triangle, 
     }
 }
 
-void clip_properly(std::list<Triangle> &triangles, int w, int h)
+void clip_frustum(std::list<Triangle> &triangles, int w, int h)
 {
     double pw = 1.0 / w;  // one pixel on the canvas width
     double ph = 1.0 / h;  // one pixel on the canvas height
