@@ -17,8 +17,18 @@ void Camera::update_pitch(double rad)
 void Camera::update_yaw(double rad)
 {
     yaw += rad;
-    if (yaw >  2 * M_PI) yaw -= 2 * M_PI;
-    if (yaw < -2 * M_PI) yaw += 2 * M_PI;
+    if (yaw > 2 * M_PI) yaw -= 2 * M_PI;
+    if (yaw < 0) yaw += 2 * M_PI;
+}
+
+double Camera::get_pitch()
+{
+    return this->pitch;
+}
+
+double Camera::get_yaw()
+{
+    return this->yaw;
 }
 
 Vec3 Camera::forward()

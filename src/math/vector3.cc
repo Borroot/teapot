@@ -119,6 +119,6 @@ double Vec3::dist_fast(const Vec3 &v1, const Vec3 &v2)
 
 std::ostream &operator<<(std::ostream &os, const Vec3 &v)
 {
-    os << v.x << " " << v.y << " " << v.z;
+    os << "(" << v.x << " " << v.y << " " << v.z << ")";
     return os;
 }

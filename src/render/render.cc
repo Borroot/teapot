@@ -23,7 +23,7 @@ static Mat4 projection_matrix(int w, int h, double fov, double far, double near)
 
 static Mat4 screen_matrix(int w, int h)
 {
-    return Mat4::scale(w / 2, h / 2, 1) * Mat4::translate(1, 1, 0);
+    return Mat4::scale(w / 2 - 0.5, h / 2 - 0.5, 1) * Mat4::translate(1, 1, 0);
 }
 
 Render::Render(int w, int h)
@@ -55,8 +55,8 @@ void Render::render(const World &world, Canvas &canvas)
     clip_farnear(ts, this->far, this->near);  // clip behind camera and far away
 
     for (Triangle &t : ts) this->projection * t;  // projection space
-    for (Triangle &t : ts) this->screen * t;  // screen space
-
     clip_properly(ts, canvas.w, canvas.h);  // clip on edges and create new triangles
+
+    for (Triangle &t : ts) this->screen * t;  // screen space
     for (Triangle &t : ts) t.draw(canvas, true, false);
 }

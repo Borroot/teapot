@@ -18,6 +18,9 @@ public:
     void update_pitch(double rad);
     void update_yaw(double rad);
 
+    double get_pitch();
+    double get_yaw();
+
     Vec3 forward();
     Mat4 view_matrix();
 };

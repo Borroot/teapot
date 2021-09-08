@@ -11,9 +11,9 @@ int main()
 {
     Window window(1200, 800, 2);
 
-    Mesh cube("res/objects/cube.obj");
-    std::vector<Mesh> meshes = {cube};
-    Camera camera(Vec3(0, 0, -3));
+    Mesh obj("res/objects/teapot.obj");
+    std::vector<Mesh> meshes = {obj};
+    Camera camera(Vec3(0, 0, -1));
     World world(meshes, camera);
 
     sf::Clock clock;
