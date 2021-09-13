@@ -9,11 +9,11 @@
 
 int main()
 {
-    Window window(1200, 800, 2);
+    Window window(1000, 800, 2);
 
-    Mesh obj("res/objects/teapot.obj");
+    Mesh obj("res/objects/cube.obj");
     std::vector<Mesh> meshes = {obj};
-    Camera camera(Vec3(0, 0, -1));
+    Camera camera(Vec3(0, 0, -3));
     World world(meshes, camera);
 
     sf::Clock clock;

@@ -9,8 +9,6 @@
 class Triangle
 {
 private:
-    static bool edgetest(int, int, const Vec4 &, const Vec4 &);
-    bool inside(int, int);
     void rasterize(Canvas &);
 
 public:
