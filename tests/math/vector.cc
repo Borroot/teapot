@@ -8,7 +8,6 @@ Test(vector, Vec4_declaration)
 {
     Vec4 v(2, 3, 4);
     cr_assert_eq(v.w, 1);
-    cr_assert_throw(Vec4(1, 1, 1, 0), std::domain_error);
 }
 
 Test(vector, length)
@@ -27,7 +26,6 @@ Test(vector, Vec4_normalize_w)
     Vec4 v(2, 4, 6, 2);
     v.normalize_w();
     cr_assert_eq(v, Vec4(1, 2, 3, 1));
-    cr_assert_throw(Vec4(1, 1, 1, 0).normalize_w(), std::domain_error);
 }
 
 Test(vector, normalize)
@@ -64,11 +62,6 @@ Test(vector, dot)
     Vec4 v5(4, 6, 8, 2);
     Vec4 v6(12, 14, 16, 2);
     cr_assert_eq(v5 * v6, 2 * 6 + 3 * 7 + 4 * 8);
-
-    Vec4 v7(6, 7, 8, 1);
-    v7.w = 0;
-    cr_assert_throw(v6 * v7, std::domain_error);
-    cr_assert_throw(v7 * v6, std::domain_error);
 }
 
 Test(vector, cross)
@@ -104,11 +97,6 @@ Test(vector, cross)
     Vec4 v9(4, 8, 14, 2);
     Vec4 v0(10, 8, 4, 2);
     cr_assert_eq(v9 ^ v0, Vec4(-20, 31, -12, 1));
-
-    Vec4 v10(1, 2, 3, 1);
-    v10.w = 0;
-    cr_assert_throw(v10 ^ v0, std::domain_error);
-    cr_assert_throw(v0 ^ v10, std::domain_error);
 }
 
 Test(vector, equality)
@@ -157,11 +145,6 @@ Test(vector, addition)
     Vec4 v5(2, 4, 6, 2);
     Vec4 v6(3, 6, 9, 3);
     cr_assert_eq(v5 + v6, Vec4(2, 4, 6, 1));
-
-    Vec4 v7(1, 2, 3, 1);
-    v7.w = 0;
-    cr_assert_throw(v6 + v7, std::domain_error);
-    cr_assert_throw(v7 + v6, std::domain_error);
 }
 
 Test(vector, subtraction)
@@ -189,11 +172,6 @@ Test(vector, subtraction)
     Vec4 v5(2, 4, 6, 2);
     Vec4 v6(3, 6, 9, 3);
     cr_assert_eq(v5 - v6, Vec4(0, 0, 0, 1));
-
-    Vec4 v7(1, 2, 3, 1);
-    v7.w = 0;
-    cr_assert_throw(v6 - v7, std::domain_error);
-    cr_assert_throw(v7 - v6, std::domain_error);
 }
 
 Test(vector, negation)
@@ -233,8 +211,4 @@ Test(vector, casting)
     Vec4 v3(9, 3, 6, 3);
     cr_assert_eq((Vec3)v2, Vec3(2, 3, 4));
     cr_assert_eq((Vec3)v3, Vec3(3, 1, 2));
-
-    Vec4 v4(2, 3, 4, 1);
-    v4.w = 0;
-    cr_assert_throw((Vec3)v4, std::domain_error);
 }
