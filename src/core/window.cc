@@ -26,10 +26,7 @@ Window::Window(int w, int h, double scale)
     if (!this->font.loadFromFile("res/fonts/SansMono-Regular.ttf"))
         throw std::runtime_error("Could not load font.");
 
-    sf::Mouse::setPosition(sf::Vector2i(w / 2, h / 2), this->window);
-    this->window.setMouseCursorGrabbed(true);
-    this->window.setMouseCursorVisible(false);
-
+    this->set_mouse(true);
 }
 
 bool Window::isopen()
@@ -68,4 +65,12 @@ void Window::draw(const World &world, double dt)
     this->window.draw(this->text(debug(world, dt)));
 
     this->window.display();
+}
+
+void Window::set_mouse(bool mouse)
+{
+    this->mouse = mouse;
+    if (mouse) sf::Mouse::setPosition(sf::Vector2i(w / 2, h / 2), this->window);
+    this->window.setMouseCursorGrabbed(mouse);
+    this->window.setMouseCursorVisible(!mouse);
 }

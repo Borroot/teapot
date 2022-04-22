@@ -9,18 +9,30 @@ static void check(Window &window)
         switch (event.type)
         {
         case sf::Event::KeyPressed:
-            // for one time actions
+            // for one time events
+            if (event.key.code == sf::Keyboard::Escape)
+                window.set_mouse(false);
             break;
+
+        case sf::Event::LostFocus:
+            window.set_mouse(false);
+            break;
+        case sf::Event::GainedFocus:
+            window.set_mouse(true);
+            break;
+
         case sf::Event::Closed:
             window.close();
             break;
-        default:
-            break;
+
+        default: break;
         }
 }
 
-static void move(World &world, double dt)
+static void move(Window &window, World &world, double dt)
 {
+    if (!window.mouse) return;
+
     Vec3 move(0, 0, 0);
 
     Vec3 forward(world.camera.forward().x, 0, world.camera.forward().z);
@@ -47,6 +59,8 @@ static void move(World &world, double dt)
 
 static void turn(Window &window, World &world, double dt)
 {
+    if (!window.mouse) return;
+
     sf::Vector2i pos = sf::Mouse::getPosition(window.window);
     pos.x -= window.w / 2;
     pos.y -= window.h / 2;
@@ -62,6 +76,6 @@ static void turn(Window &window, World &world, double dt)
 void update(Window &window, World &world, double dt)
 {
     check(window);
-    move(world, dt);
+    move(window, world, dt);
     turn(window, world, dt);
 }

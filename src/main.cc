@@ -11,7 +11,7 @@ int main()
 {
     Window window(1000, 800, 2);
 
-    Mesh obj("res/objects/cube.obj");
+    Mesh obj("res/objects/teapot.obj");
     std::vector<Mesh> meshes = {obj};
     Camera camera(Vec3(0, 0, -3));
     World world(meshes, camera);

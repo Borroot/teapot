@@ -19,6 +19,7 @@ private:
 
 public:
     sf::RenderWindow window;
+    bool mouse; // true if grabbed and invisible
 
     int w;
     int h;
@@ -32,5 +33,5 @@ public:
     bool poll(sf::Event &);
 
     void draw(const World &, double dt);
-    void set(int x, int y, sf::Color c);
+    void set_mouse(bool);
 };
